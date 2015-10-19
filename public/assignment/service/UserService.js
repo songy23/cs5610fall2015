@@ -1,4 +1,8 @@
 (
+    angular
+    .module("FormBuilderApp")
+    .factory();
+    
     function UserService() {
         var current_users = [];
         
