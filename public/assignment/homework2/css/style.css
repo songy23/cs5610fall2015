@@ -1,0 +1,17 @@
+.glyphicon {
+    float: right;
+}
+
+#form-fields {
+    border-style: solid;
+    padding: 10px;
+}
+
+
+#sort1 {
+    float: left;
+}
+
+#sort2 {
+    float: left;
+}
