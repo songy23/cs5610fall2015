@@ -4,10 +4,16 @@
     .factory("UserService", UserService());
     
     function UserService() {
-        var service = {};
+        var service = {
+            findUserByUsernameAndPassword : findUserByUsernameAndPassword,
+            findAllUsers : findAllUsers,
+            createUser : createUser,
+            deleteUserById : deleteUserById,
+            updateUser : updateUser
+        };
         var current_users = [];
         
-        service.findUserByUsernameAndPassword = function(username, password, callback) {
+        function findUserByUsernameAndPassword(username, password, callback) {
             var user = null;
             for (var i = 0; i < current_users.length; i++) {
                 if (current_users[i].username == username && current_users[i].password == password) {
@@ -15,41 +21,55 @@
                 }
             }
             
-            callback(user);
+            $http.success(callback);
+            return user;
         }
         
-        service.findAllUsers = function(callback) {
+        function findAllUsers(callback) {
          
-            callback(current_users);
+            $http.success(callback);
+            return current_users;
         }
         
-        service.createUser function(user, callback) {
+        function createUser(user, callback) {
         
             var newUser = {
-                userId : ,
+                userId : Guid.create(),
                 username : user.username,
-                password : user.password
+                password : user.password,
+                firstName : user.firstName,
+                lastName : user.lastName,
+                email : user.email
             };
             current_users.push(newUser);
-            callback(newUser);
+            $http.success(callback);
         }
         
-        service.deleteUserById = function(userId, callback) {
-        
+        function deleteUserById(userId, callback) {
             for (var i = 0; i < current_users.length; i++) {
                 if (current_users[i].userId == userId) {
                     current_users.splice(i, 1);
                     break;
                 }
             }   
-                 
-            callback(current_users);
+            return current_users;
+            $http.success(callback);
         }
     
-        service.updateUser = function(userId, user, callback) {
+        function updateUser(userId, user, callback) {
             
-            var updated_user = null;
-            callback(updated_user);
+            for (var i = 0; i < current_users.length; i++) {
+                if (current_users[i].userId == userId) {
+                    current_users[i].username = user.username;
+                    current_users[i].password = user.password;
+                    current_users[i].firstName = user.firstName;
+                    current_users[i].lastName = user.lastName;
+                    current_users[i].email = user.email;
+                }
+            }
+            
+            return current_users;
+            $http.success(callback);
         }
         
         return service;

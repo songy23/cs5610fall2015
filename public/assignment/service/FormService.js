@@ -4,31 +4,56 @@
     .factory("FormService", FormService());
     
     function FormService() {
-        var service = {};
+        var service = {
+            createFormForUser : createFormForUser,
+            findAllFormsForUser : findAllFormsForUser,
+            deleteFormById : deleteFormById,
+            updateFormById : updateFormById
+        };
         var forms = [];
         
-        service.createFormForUser = function(userId, form, callback) {
-            var newForm = null;
-            
-            callback(newForm);
+        function createFormForUser(userId, form, callback) {
+            var newForm = {
+                formId : Guid.create(),
+                userId : userID,
+                formName : form.formName,
+                formFields : formFields
+            };
+            forms.push(newForm);
+            return forms;
+            $http.success(callback);
         }
         
-        service.findAllFormsForUser = function(userId, callback) {
+        function findAllFormsForUser(userId, callback) {
             var userForms = [];
-            
-            callback(userForms);
+            for (var i = 0; i < forms.length; i++) {
+                if (forms[i].userId == userId) {
+                    userForms.push(forms[i]);
+                }
+            }
+            return userForms;
+            $http.success(callback);
         }
         
-        service.deleteFormById function(formId, callback) {
-        
-            callback(forms);
+        function deleteFormById(formId, callback) {
+            for (var i = 0; i < forms.length; i++) {
+                if (forms[i].formId == formId) {
+                    forms.splice(i, 1);
+                    break;
+                }
+            }
+            $http.success(callback);
         }
         
-        service.updateFormById = function(formId, newForm, callback) {
-        
-            var updatedForm = null;
+        function updateFormById(formId, newForm, callback) {
+            for (var i = 0; i < forms.length; i++) {
+                if (forms[i].formId == formId) {
+                    forms[i].formName = newForm.formName;
+                    forms[i].formFields = newForm.formFields;
+                }
+            }
             
-            callback(updatedForm);
+            $http.success(callback);
         }
         
         return service;

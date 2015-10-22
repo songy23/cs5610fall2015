@@ -5,5 +5,9 @@
     
     function RegisterController($scope, $location) {
         $scope.$location = $location;
+        
+        function register(user) {
+            
+        }
     }
 }) ();
