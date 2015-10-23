@@ -6,20 +6,27 @@
     function FormController($scope, $location) {
         $scope.$location = $location;
         
+        var forms = [
+            { formName : "Registration Form"},
+            { formName : "Contact List"},
+            { formName : "To Do List"}
+        ];
         
-        function addForm() {
+        $scope.forms = forms;
+        
+        $scope.addForm = function() {
             
         }
         
-        function updateForm() {
+        $scope.updateForm = function() {
             
         }
         
-        function deleteForm($index) {
-            
+        $scope.deleteForm = function(index) {
+            $scope.forms.splice(index, 1);
         }
         
-        function selectForm($index) {
+        $scope.selectForm = function(index) {
             
         }
     }

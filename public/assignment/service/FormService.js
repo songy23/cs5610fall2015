@@ -1,23 +1,28 @@
 (
     angular
     .module("FormBuilderApp")
-    .factory("FormService", FormService());
+    .factory("FormService", FormService);
     
     function FormService() {
         var service = {
             createFormForUser : createFormForUser,
             findAllFormsForUser : findAllFormsForUser,
             deleteFormById : deleteFormById,
-            updateFormById : updateFormById
+            updateFormById : updateFormById,
+            getAllForms : getAllForms
         };
-        var forms = [];
+    
+        var forms = [
+            {formId : Guid.create(), userId : Guid.create(), formName : "Registration Form"},
+            {formId : Guid.create(), userId : Guid.create(), formName : "Contact List"},
+            {formId : Guid.create(), userId : Guid.create(), formName : "To Do List"}
+        ];
         
-        function createFormForUser(userId, form, callback) {
+        function createFormForUser(User, form, callback) {
             var newForm = {
                 formId : Guid.create(),
-                userId : userID,
-                formName : form.formName,
-                formFields : formFields
+                userId : User.userId,
+                formName : form.formName
             };
             forms.push(newForm);
             return forms;
@@ -49,13 +54,17 @@
             for (var i = 0; i < forms.length; i++) {
                 if (forms[i].formId == formId) {
                     forms[i].formName = newForm.formName;
-                    forms[i].formFields = newForm.formFields;
+                    break;
                 }
             }
             
             $http.success(callback);
         }
         
+        function getAllForms() {
+            return forms;
+        }
+    
         return service;
     }
 ) ();

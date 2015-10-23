@@ -6,9 +6,12 @@
     function LoginController($scope, $location) {
         $scope.$location = $location;
         
-        function login(user) {
-            var u = ;
-            
+        var user = {};
+        
+        
+        function login() {
+            var u = null;
+            //$rootScope;
             $scope.$location = "#/profile";
         }
     }

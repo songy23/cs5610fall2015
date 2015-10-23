@@ -1,7 +1,7 @@
 (
     angular
     .module("FormBuilderApp")
-    .factory("UserService", UserService());
+    .factory("UserService", UserService);
     
     function UserService() {
         var service = {
