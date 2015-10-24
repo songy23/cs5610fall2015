@@ -3,7 +3,7 @@
         .module("FormBuilderApp")
         .controller("FormController", FormController);
     
-    function FormController($scope, $location) {
+    function FormController($scope, $location, $rootScope) {
         $scope.$location = $location;
         
         var forms = [
@@ -14,11 +14,11 @@
         
         $scope.forms = forms;
         
-        $scope.addForm = function() {
-            
+        $scope.addForm = function(newForm) {
+            forms.push(newForm);
         }
         
-        $scope.updateForm = function() {
+        $scope.updateForm = function(newForm) {
             
         }
         

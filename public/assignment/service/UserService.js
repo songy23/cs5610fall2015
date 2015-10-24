@@ -1,4 +1,4 @@
-(
+(function() {
     angular
     .module("FormBuilderApp")
     .factory("UserService", UserService);
@@ -21,14 +21,14 @@
                 }
             }
             
-            $http.success(callback);
-            return user;
+            //$http.success(callback);
+            callback(user);
         }
         
         function findAllUsers(callback) {
          
-            $http.success(callback);
-            return current_users;
+            //$http.success(callback);
+            callback(current_users);
         }
         
         function createUser(user, callback) {
@@ -42,7 +42,7 @@
                 email : user.email
             };
             current_users.push(newUser);
-            $http.success(callback);
+            callback(current_users);
         }
         
         function deleteUserById(userId, callback) {
@@ -52,8 +52,7 @@
                     break;
                 }
             }   
-            return current_users;
-            $http.success(callback);
+            callback(current_users);
         }
     
         function updateUser(userId, user, callback) {
@@ -68,10 +67,9 @@
                 }
             }
             
-            return current_users;
-            $http.success(callback);
+            callback(current_users);
         }
         
         return service;
     }
-) ();
+}) ();

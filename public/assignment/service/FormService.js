@@ -1,4 +1,4 @@
-(
+(function() {
     angular
     .module("FormBuilderApp")
     .factory("FormService", FormService);
@@ -25,8 +25,7 @@
                 formName : form.formName
             };
             forms.push(newForm);
-            return forms;
-            $http.success(callback);
+            callback(forms);
         }
         
         function findAllFormsForUser(userId, callback) {
@@ -36,8 +35,7 @@
                     userForms.push(forms[i]);
                 }
             }
-            return userForms;
-            $http.success(callback);
+            callback(userForms);
         }
         
         function deleteFormById(formId, callback) {
@@ -47,7 +45,7 @@
                     break;
                 }
             }
-            $http.success(callback);
+            callback(forms);
         }
         
         function updateFormById(formId, newForm, callback) {
@@ -58,7 +56,7 @@
                 }
             }
             
-            $http.success(callback);
+            callback(forms);
         }
         
         function getAllForms() {
@@ -66,5 +64,5 @@
         }
     
         return service;
-    }
-) ();
+    }   
+}) ();
