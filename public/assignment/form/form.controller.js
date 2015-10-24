@@ -19,7 +19,7 @@
                     user_with_id = user_found; 
                 });
                 if (user_with_id != null) {
-                    FormService.createFormForUser(user_with_id, newForm, function(forms) {
+                    FormService.createFormForUser(user_with_id.userId, newForm, function(forms) {
                         console.log("Successfully create new form. Current forms: " + forms.length);
                         $scope.forms = forms;
                     });

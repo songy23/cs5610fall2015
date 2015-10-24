@@ -32,6 +32,7 @@
                 }
             }
             
+            $location.url("/profile");
 //            alert("Profile Updated");
         }
     }

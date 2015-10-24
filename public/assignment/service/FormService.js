@@ -34,10 +34,10 @@
             callback(current_forms);
         }
         
-        function createFormForUser(User, form, callback) {
+        function createFormForUser(userId, form, callback) {
             var newForm = {
                 formId : guid(),
-                userId : User.userId,
+                userId : userId,
                 formName : form.formName
             };
             current_forms.push(newForm);

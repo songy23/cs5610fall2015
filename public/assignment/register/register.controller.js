@@ -16,7 +16,7 @@
             }
             
             UserService.createUser(new_user, callback);
-            $scope.$location = "/profile";
+            $location.url("/profile");
             
             $rootScope.user = new_user;
         }
