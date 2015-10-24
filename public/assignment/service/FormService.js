@@ -22,17 +22,16 @@
             getForms : getForms,
             findFormId : findFormId
         };
-        return service;
         
-        var forms = [
+        var current_forms = [
             {formId : guid(), userId : guid(), formName : "Registration Form"},
             {formId : guid(), userId : guid(), formName : "Contact List"},
             {formId : guid(), userId : guid(), formName : "To Do List"}
         ];
         
-        function getForms() {
-            console.log(forms.length);
-            return forms;
+        function getForms(callback) {
+            console.log(current_forms.length);
+            callback(current_forms);
         }
         
         function createFormForUser(User, form, callback) {
@@ -41,52 +40,54 @@
                 userId : User.userId,
                 formName : form.formName
             };
-            forms.push(newForm);
-            callback(forms);
+            current_forms.push(newForm);
+            callback(current_forms);
         }
         
         function findAllFormsForUser(userId, callback) {
             var userForms = [];
-            for (var i = 0; i < forms.length; i++) {
-                if (forms[i].userId == userId) {
-                    userForms.push(forms[i]);
+            for (var i = 0; i < current_forms.length; i++) {
+                if (current_forms[i].userId == userId) {
+                    userForms.push(current_forms[i]);
                 }
             }
             callback(userForms);
         }
         
         function deleteFormById(formId, callback) {
-            for (var i = 0; i < forms.length; i++) {
-                if (forms[i].formId == formId) {
-                    forms.splice(i, 1);
+            for (var i = 0; i < current_forms.length; i++) {
+                if (current_forms[i].formId == formId) {
+                    current_forms.splice(i, 1);
                     break;
                 }
             }
-            callback(forms);
+            callback(current_forms);
         }
         
         function updateFormById(formId, newForm, callback) {
-            for (var i = 0; i < forms.length; i++) {
-                if (forms[i].formId == formId) {
-                    forms[i].formName = newForm.formName;
+            for (var i = 0; i < current_forms.length; i++) {
+                if (current_forms[i].formId == formId) {
+                    current_forms[i].formName = newForm.formName;
                     break;
                 }
             }
             
-            callback(forms);
+            callback(current_forms);
         }
         
         
         function findFormId(form, callback) {
             var formId = null;
-            for (var i = 0; i < forms.length; i++) {
-                if (forms[i].formName == form.formName) {
-                    formId = forms[i].formId;
+            for (var i = 0; i < current_forms.length; i++) {
+                if (current_forms[i].formName == form.formName) {
+                    formId = current_forms[i].formId;
                     break;
                 }
             }
             
             callback(formId);
         }
+        
+        return service;
     }   
 }) ();

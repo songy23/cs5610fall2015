@@ -9,13 +9,15 @@
         $scope.login = function() {
             UserService.findUserByUsernameAndPassword($scope.username, $scope.password, callback);
             
-            $scope.$location = "#/profile";  
-            $rootScope.user = $scope.user;
+            $scope.$location = "#/profile"; 
         }
         
         
         function callback(user) {
-            console.log("success");
+            if (user != null) {
+                console.log("Log in success"); 
+                $rootScope.user = user;
+            }   
         }
     }
 }) ();

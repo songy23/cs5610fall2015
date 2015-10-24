@@ -19,25 +19,21 @@
             }
             
             if (current_user != null) {
-                var user_found = UserService.findUserByUsernameAndPassword(current_user.username, current_user.password, callback1);
+                var user_found = null;
+                UserService.findUserByUsernameAndPassword(current_user.username, current_user.password, function(user) {
+                    console.log("callback1 succeeds");
+                    user_found = user;
+                });
                 if (user_found != null) {
-                    UserService.updateUser(user_found.userId, updated_user, callback2);
+                    UserService.updateUser(user_found.userId, updated_user, function (users) {
+                        console.log("callback2 succeeds");
+                        $scope.current_users = users;
+                    });
                 }
             }
             
 //            alert("Profile Updated");
         }
     }
-    
-    function callback1(user) {
-        console.log("callback1 succeeds");
-        return user;
-    }
-    
-    function callback2(users) {
-        console.log("callback2 succeeds");
-        return users;
-    }
-    
     
 }) ();
