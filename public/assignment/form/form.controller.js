@@ -7,8 +7,12 @@
         $scope.$location = $location;
         
         var current_user = $rootScope.user;
+        $scope.forms = [];
         
-        FormService.getForms(function (current_forms) { $scope.forms = current_forms; });
+        if (current_user != null) {
+            FormService.findAllFormsForUser(current_user.userId, function (current_forms) { $scope.forms = current_forms; });
+        }
+        
         
         $scope.addForm = function(newForm) {
             var user_with_id = null;

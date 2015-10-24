@@ -19,20 +19,10 @@
             findAllFormsForUser : findAllFormsForUser,
             deleteFormById : deleteFormById,
             updateFormById : updateFormById,
-            getForms : getForms,
             findFormId : findFormId
         };
         
-        var current_forms = [
-            {formId : guid(), userId : guid(), formName : "Registration Form"},
-            {formId : guid(), userId : guid(), formName : "Contact List"},
-            {formId : guid(), userId : guid(), formName : "To Do List"}
-        ];
-        
-        function getForms(callback) {
-            console.log(current_forms.length);
-            callback(current_forms);
-        }
+        var current_forms = [];
         
         function createFormForUser(userId, form, callback) {
             var newForm = {
