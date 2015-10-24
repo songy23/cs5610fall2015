@@ -6,10 +6,8 @@
     function LoginController($scope, $location, $rootScope, UserService) {
         $scope.$location = $location;
         
-        var u = null;
-        $scope.login = function(user) {
-            
-            UserService.findUserByUsernameAndPassword(user.username, user.password, callback);
+        $scope.login = function() {
+            UserService.findUserByUsernameAndPassword($scope.username, $scope.password, callback);
             
             $scope.$location = "#/profile";  
             $rootScope.user = $scope.user;
@@ -17,7 +15,7 @@
         
         
         function callback(user) {
-            u = user;
+            console.log("success");
         }
     }
 }) ();

@@ -3,24 +3,41 @@
     .module("FormBuilderApp")
     .factory("FormService", FormService);
     
+    function guid() {
+      function s4() {
+        return Math.floor((1 + Math.random()) * 0x10000)
+          .toString(16)
+          .substring(1);
+      }
+      return s4() + s4() + '-' + s4() + '-' + s4() + '-' +
+        s4() + '-' + s4() + s4() + s4();
+    }
+    
     function FormService() {
         var service = {
             createFormForUser : createFormForUser,
             findAllFormsForUser : findAllFormsForUser,
             deleteFormById : deleteFormById,
             updateFormById : updateFormById,
-            getAllForms : getAllForms
+            getForms : getForms,
+            findFormId : findFormId
         };
-    
+        return service;
+        
         var forms = [
-            {formId : Guid.create(), userId : Guid.create(), formName : "Registration Form"},
-            {formId : Guid.create(), userId : Guid.create(), formName : "Contact List"},
-            {formId : Guid.create(), userId : Guid.create(), formName : "To Do List"}
+            {formId : guid(), userId : guid(), formName : "Registration Form"},
+            {formId : guid(), userId : guid(), formName : "Contact List"},
+            {formId : guid(), userId : guid(), formName : "To Do List"}
         ];
+        
+        function getForms() {
+            console.log(forms.length);
+            return forms;
+        }
         
         function createFormForUser(User, form, callback) {
             var newForm = {
-                formId : Guid.create(),
+                formId : guid(),
                 userId : User.userId,
                 formName : form.formName
             };
@@ -59,10 +76,17 @@
             callback(forms);
         }
         
-        function getAllForms() {
-            return forms;
+        
+        function findFormId(form, callback) {
+            var formId = null;
+            for (var i = 0; i < forms.length; i++) {
+                if (forms[i].formName == form.formName) {
+                    formId = forms[i].formId;
+                    break;
+                }
+            }
+            
+            callback(formId);
         }
-    
-        return service;
     }   
 }) ();

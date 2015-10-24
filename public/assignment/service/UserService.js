@@ -3,6 +3,16 @@
     .module("FormBuilderApp")
     .factory("UserService", UserService);
     
+    function guid() {
+      function s4() {
+        return Math.floor((1 + Math.random()) * 0x10000)
+          .toString(16)
+          .substring(1);
+      }
+      return s4() + s4() + '-' + s4() + '-' + s4() + '-' +
+        s4() + '-' + s4() + s4() + s4();
+    }
+    
     function UserService() {
         var service = {
             findUserByUsernameAndPassword : findUserByUsernameAndPassword,
@@ -34,7 +44,8 @@
         function createUser(user, callback) {
         
             var newUser = {
-                userId : Guid.create(),
+                
+                userId : guid(),
                 username : user.username,
                 password : user.password,
                 firstName : user.firstName,

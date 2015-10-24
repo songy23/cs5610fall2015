@@ -6,15 +6,23 @@
     function RegisterController($scope, $location, $rootScope, UserService) {
         $scope.$location = $location;
         
-        $scope.register = function(new_user) {
+        $scope.register = function() {
+            var new_user = {
+                username : $scope.username,
+                password : $scope.password,
+                firstName : "",
+                lastName : "",
+                email : $scope.email
+            }
+            
             UserService.createUser(new_user, callback);
-            $scope.$location = "#/profile";
+            $scope.$location = "/profile";
             
             $rootScope.user = new_user;
         }
         
         function callback(users) {
-            return users;
+            console.log(users.length);
         }
     }
 }) ();
