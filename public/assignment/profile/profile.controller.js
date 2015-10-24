@@ -25,9 +25,10 @@
                     user_found = user;
                 });
                 if (user_found != null) {
-                    UserService.updateUser(user_found.userId, updated_user, function (users) {
+                    UserService.updateUser(user_found.userId, updated_user, function (user) {
                         console.log("callback2 succeeds");
-                        $scope.current_users = users;
+                        $scope.user = user;
+                        $rootScope.user = user;
                     });
                 }
             }

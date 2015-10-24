@@ -17,12 +17,11 @@
             
             UserService.createUser(new_user, callback);
             $location.url("/profile");
-            
-            $rootScope.user = new_user;
         }
         
-        function callback(users) {
-            console.log(users.length);
+        function callback(user) {
+            console.log(user.username);
+            $rootScope.user = user;
         }
     }
 }) ();

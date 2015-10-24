@@ -15,20 +15,11 @@
         
         
         $scope.addForm = function(newForm) {
-            var user_with_id = null;
             if (current_user != null) {
-                console.log("current user is " + current_user.username);
-                UserService.findUserByUsernameAndPassword(current_user.username, current_user.password, function(user_found) {
-                    console.log("id of current user: " + user_found.userId);
-                    user_with_id = user_found; 
+                FormService.createFormForUser(current_user.userId, newForm, function(newForm) {
+                    $scope.forms.push(newForm);
+                    console.log("Successfully create new form. Current forms: " + $scope.forms.length);
                 });
-                if (user_with_id != null) {
-                    FormService.createFormForUser(user_with_id.userId, newForm, function(forms) {
-                        console.log("Successfully create new form. Current forms: " + forms.length);
-                        $scope.forms = forms;
-                    });
-                }
-                
             }
         }
         

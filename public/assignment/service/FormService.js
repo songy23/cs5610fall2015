@@ -18,8 +18,7 @@
             createFormForUser : createFormForUser,
             findAllFormsForUser : findAllFormsForUser,
             deleteFormById : deleteFormById,
-            updateFormById : updateFormById,
-            findFormId : findFormId
+            updateFormById : updateFormById
         };
         
         var current_forms = [];
@@ -31,7 +30,7 @@
                 formName : form.formName
             };
             current_forms.push(newForm);
-            callback(current_forms);
+            callback(newForm);
         }
         
         function findAllFormsForUser(userId, callback) {
@@ -58,24 +57,9 @@
             for (var i = 0; i < current_forms.length; i++) {
                 if (current_forms[i].formId == formId) {
                     current_forms[i].formName = newForm.formName;
-                    break;
+                    callback(current_forms[i]);
                 }
             }
-            
-            callback(current_forms);
-        }
-        
-        
-        function findFormId(form, callback) {
-            var formId = null;
-            for (var i = 0; i < current_forms.length; i++) {
-                if (current_forms[i].formName == form.formName) {
-                    formId = current_forms[i].formId;
-                    break;
-                }
-            }
-            
-            callback(formId);
         }
         
         return service;

@@ -53,7 +53,7 @@
                 email : user.email
             };
             current_users.push(newUser);
-            callback(current_users);
+            callback(newUser);
         }
         
         function deleteUserById(userId, callback) {
@@ -75,10 +75,9 @@
                     current_users[i].firstName = user.firstName;
                     current_users[i].lastName = user.lastName;
                     current_users[i].email = user.email;
+                    callback(current_users[i]);
                 }
             }
-            
-            callback(current_users);
         }
         
         return service;
