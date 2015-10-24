@@ -8,8 +8,6 @@
         
         $scope.login = function() {
             UserService.findUserByUsernameAndPassword($scope.username, $scope.password, callback);
-            
-            $location.url("/profile");
         }
         
         
@@ -17,6 +15,7 @@
             if (user != null) {
                 console.log("Log in successfully"); 
                 $rootScope.user = user;
+                $location.url("/profile");
             }   
         }
     }
