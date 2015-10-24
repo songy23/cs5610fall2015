@@ -37,14 +37,10 @@
         }
         
         $scope.deleteForm = function(index) {
-            var form_to_delete = $scope.forms.splice(index, 1);
-            var form_to_delete_Id = null;
-            FormService.findFormId(form_to_delete, function (id) {
-                console.log("Id of form to be deleted : " + id);
-                form_to_delete_Id = id;
-            });
+            var form_to_delete_Id = $scope.forms[index].formId;
             FormService.deleteFormById(form_to_delete_Id, function(current_forms) {
                 console.log("Length of current_forms: " + current_forms.length);
+                $scope.forms = current_forms;
             });
         }
         
