@@ -78,6 +78,8 @@
                     callback(current_users[i]);
                 }
             }
+            
+            callback(null);
         }
         
         return service;

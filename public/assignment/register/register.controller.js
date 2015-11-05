@@ -7,16 +7,20 @@
         $scope.$location = $location;
         
         $scope.register = function() {
-            var new_user = {
-                username : $scope.username,
-                password : $scope.password,
-                firstName : "",
-                lastName : "",
-                email : $scope.email
+            if ($scope.password == $scope.passwordVerify) {
+                var new_user = {
+                    username : $scope.username,
+                    password : $scope.password,
+                    firstName : "",
+                    lastName : "",
+                    email : $scope.email
+                }
+
+                UserService.createUser(new_user, callback);
+                $location.url("/profile");
+            } else {
+                alert("Password doesn't match");
             }
-            
-            UserService.createUser(new_user, callback);
-            $location.url("/profile");
         }
         
         function callback(user) {
