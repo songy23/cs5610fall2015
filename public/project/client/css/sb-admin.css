@@ -225,3 +225,43 @@ ul.alert-dropdown {
 .panel-yellow > a:hover {
     color: #df8a13;
 }
+
+.registration {
+    background-color: #222;
+}
+
+.profile {
+    background-color: #222;
+}
+
+.registration-label {
+    color: white;
+}
+
+.profile {
+    border: 20px;
+    padding: 20px;
+}
+
+.registration-form {
+    border: 20px;
+    padding: 20px;
+}
+
+.para-header {
+    margin: 10px;
+    border: 15px;
+}
+
+.retrieve-password {
+    font-size: 25px;
+    color: lightgray;
+}
+
+.current-username {
+    background-color: gainsboro;
+    font-size: 18px;
+    margin: 2px;
+    padding: 5px;
+    content: 3px;
+}
