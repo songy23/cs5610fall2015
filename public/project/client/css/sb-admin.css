@@ -265,3 +265,8 @@ ul.alert-dropdown {
     padding: 5px;
     content: 3px;
 }
+
+.retrieve-instruction {
+    margin-top: 25px;
+    margin-left: 1px;
+}
