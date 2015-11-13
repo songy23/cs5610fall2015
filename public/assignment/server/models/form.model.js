@@ -1,4 +1,4 @@
-var forms = require("form.mock.json");
+var forms = require("./form.mock.json");
 
 module.exports = function(app) {
     
@@ -12,7 +12,14 @@ module.exports = function(app) {
     };
     
     function createForm(newForm) {
-        
+        var guid = Guid.create();
+        var form_created = {
+            "id" : guid, 
+            "title" : newForm.title, 
+            "userId" : newForm.userId,
+            "fields" : newForm.fields
+        };
+        forms.push(form_created);
     }
     
     function findAllForm() {

@@ -1,7 +1,7 @@
 module.exports = function(app, model, db) {
     
-    require("../models/user.model.js");
-    var users = [];
+    api = require("../models/user.model.js");
+    var users = api.findAllUser;
     
     app.post('/api/assignment/user', function (req, res) {
         var newUser = req.body;

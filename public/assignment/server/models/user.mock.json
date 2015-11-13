@@ -4,4 +4,4 @@
 	{"id": 345, "firstName": "Charlie",	"lastName": "Brown", 		"username": "charlie", "password": "charlie"},
 	{"id": 456, "firstName": "Dan",	"lastName": "Craig", 		"username": "dan", 	"password": "dan"},
 	{"id": 567, "firstName": "Edward",	"lastName": "Norton", 		"username": "ed",	"password": "ed"}
-];
+]

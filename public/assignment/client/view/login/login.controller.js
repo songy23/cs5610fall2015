@@ -7,7 +7,13 @@
         $scope.$location = $location;
         
         $scope.login = function() {
-            UserService.findUserByUsernameAndPassword($scope.username, $scope.password, callback);
+            UserService.findUserByUsernameAndPassword($scope.username, $scope.password, callback).then(function(response) {
+                if (response != null) {
+                    console.log("Log in successfully"); 
+                    $rootScope.user = response;
+                    $location.url("/profile");
+                } 
+            });
         }
         
         

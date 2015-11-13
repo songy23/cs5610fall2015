@@ -1,7 +1,7 @@
 module.exports = function(app, model, db) {
     
-    require("../models/form.model.js");
-    var forms = [];
+    api = require("../models/form.model.js");
+    var forms = api.findAllForm;
     
     app.get('/api/assignment/form/:formId/field', function (req, res) {
         var formId = req.params.formId;

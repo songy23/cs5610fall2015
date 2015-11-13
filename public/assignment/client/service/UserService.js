@@ -13,7 +13,7 @@
         s4() + '-' + s4() + s4() + s4();
     }
     
-    function UserService() {
+    function UserService($http, $q) {
         var service = {
             findUserByUsernameAndPassword : findUserByUsernameAndPassword,
             findAllUsers : findAllUsers,
@@ -24,6 +24,7 @@
         var current_users = [];
         
         function findUserByUsernameAndPassword(username, password, callback) {
+            var deferred = $q.defer();
             var user = null;
             for (var i = 0; i < current_users.length; i++) {
                 if (current_users[i].username == username && current_users[i].password == password) {
@@ -31,8 +32,12 @@
                 }
             }
             
-            //$http.success(callback);
             callback(user);
+            $http
+                .success(function(response) {
+                deferred.resolve(response);
+            });
+            return deferred.promise;
         }
         
         function findAllUsers(callback) {

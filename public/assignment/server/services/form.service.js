@@ -1,7 +1,7 @@
 module.exports = function(app, model, db) {
     
-    require("../models/form.model.js");
-    var forms = [];
+    api = require("../models/form.model.js");
+    var forms = api.findAllForm;
     
     app.get('/api/assignment/user/:userId/form', function (req, res) {
         var userId = req.params.userId;
@@ -11,7 +11,7 @@ module.exports = function(app, model, db) {
                 formsOfUser.push(forms[i]);
             }
         }
-        return formsOfUser;
+        res.jsonp(formsOfUser);
     });
     
     app.get('/api/assignment/form/:formId', function (req, res) {

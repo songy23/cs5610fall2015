@@ -13,7 +13,7 @@
         s4() + '-' + s4() + s4() + s4();
     }
     
-    function FormService() {
+    function FormService($http, $q) {
         var service = {
             createFormForUser : createFormForUser,
             findAllFormsForUser : findAllFormsForUser,

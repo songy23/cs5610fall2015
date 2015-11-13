@@ -13,7 +13,7 @@
         s4() + '-' + s4() + s4() + s4();
     }
     
-    function FieldService() {
+    function FieldService($http, $q) {
         var service = {
             createFieldForForm : createFieldForForm,
             getFieldsForForm : getFieldsForForm,

@@ -1,4 +1,4 @@
-var users = require("user.mock.json");
+var users = require("./user.mock.json");
 
 module.exports = function(app) {
 
@@ -13,7 +13,15 @@ module.exports = function(app) {
     };
     
     function createUser(newUser) {
-        
+        var guid = Guid.create();
+        var user_created = {
+            "id": guid, 
+            "firstName" : newUser.firstName, 	
+            "lastName" : newUser.lastName,	
+            "username" : newUser.username, 	
+            "password" : newUser.password
+        };
+        users.push(user_created);
     }
     
     function findAllUser() {
