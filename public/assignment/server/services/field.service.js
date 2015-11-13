@@ -1,4 +1,71 @@
-
+module.exports = function(app, model, db) {
+    
+    require("../models/form.model.js");
+    var forms = [];
+    
+    app.get('/api/assignment/form/:formId/field', function (req, res) {
+        var formId = req.params.formId;
+        for (var i = 0; i < forms.length; i++) {
+            if (forms[i].id == formId) {
+                res.jsonp(forms[i].fields);
+            }
+        }
+        res.jsonp(null);
+    });
+    
+    app.get('/api/assignment/form/:formId/field/:fieldId', function (req, res) {
+        var formId = req.params.formId;
+        var fieldId = req.params.fieldId;
+        
+        for (var i = 0; i < forms.length; i++) {
+            if (forms[i].id == formId) {
+                for (var j = 0; j < forms[i].fields.length; i++) {
+                    if (forms[i].fields[j].id == fieldId) {
+                        res.jsonp(forms[i].fields[j]);
+                    }
+                }
+            }
+        }
+        res.jsonp(null);
+    });
+    
+    app.post('/api/assignment/form/:formId/field', function (req, res) {
+        var formId = req.params.formId;
+    });
+    
+    app.put('/api/assignment/form/:formId/field/:fieldId', function (req, res) {
+        var formId = req.params.formId;
+        var fieldId = req.params.fieldId;
+        var newField = req.params.body;
+        
+        for (var i = 0; i < forms.length; i++) {
+            if (forms[i].id == formId) {
+                for (var j = 0; j < forms[i].fields.length; i++) {
+                    if (forms[i].fields[j].id == fieldId) {
+                        forms[i].fields[j].label = newField.label;
+                        forms[i].fields[j].type = newField.type;
+                        forms[i].fields[j].placeholder = newField.placeholder;
+                    }
+                }
+            }
+        }
+    });
+    
+    app.delete('/api/assignment/form/:formId/field/:fieldId', function (req, res) {
+        var formId = req.params.formId;
+        var fieldId = req.params.fieldId;
+        
+        for (var i = 0; i < forms.length; i++) {
+            if (forms[i].id == formId) {
+                for (var j = 0; j < forms[i].fields.length; i++) {
+                    if (forms[i].fields[j].id == fieldId) {
+                        forms[i].fields.splice(j, 1);
+                    }
+                }
+            }
+        }
+    });
+};
 
 /*
 

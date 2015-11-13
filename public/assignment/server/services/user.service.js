@@ -1,4 +1,73 @@
-
+module.exports = function(app, model, db) {
+    
+    require("../models/user.model.js");
+    var users = [];
+    
+    app.post('/api/assignment/user', function (req, res) {
+        var newUser = req.body;
+        console.log(newUser);
+        users.push(newUser);
+        res.json(users);
+    });
+    
+    app.get('/api/assignment/user', function (req, res) {
+        res.jsonp(users);
+    });
+    
+    app.get('/api/assignment/user/:id', function (req, res) {
+        var userId = req.params.userId;
+        var user_found = null;
+        for (var i = 0; i < users.length; i++) {
+            if (users[i].id == userId) {
+                user_found = users[i];
+            }
+        }
+        res.jsonp(user_found);
+    });
+    
+    app.get('/api/assignment/user?username=username', function (req, res) {
+        var username = req.params.username;
+        var user_found = null;
+        for (var i = 0; i < users.length; i++) {
+            if (users[i].username == username) {
+                user_found = users[i];
+            }
+        }
+        res.jsonp(user_found);
+    });
+    
+    app.get('/api/assignment/user?username=username&password=password', function (req, res) {
+        var username = req.params.username;
+        var password = req.params.password;
+        var user_found = null;
+        for (var i = 0; i < users.length; i++) {
+            if (users[i].username == username && users[i].password == password) {
+                user_found = users[i];
+            }
+        }
+        res.jsonp(user_found);
+    });
+    
+    app.put('/api/assignment/user/:id', function (req, res) {
+        var id = req.params.id;
+        for (var i = 0; i < users.length; i++) {
+            if (users[i].id == id) {
+                users[i] = req.body;
+            }
+        }
+        res.json(users);
+    });
+    
+    app.delete('/api/assignment/user/:id', function (req, res) {
+        var id = req.params.id;
+        for (var i = 0; i < users.length; i++) {
+            if (users[i].id == id) {
+                users.splice(i, 1);
+            }
+        }
+        res.json(users);
+    });
+};
 
 /*
 

@@ -1,4 +1,55 @@
-
+module.exports = function(app, model, db) {
+    
+    require("../models/form.model.js");
+    var forms = [];
+    
+    app.get('/api/assignment/user/:userId/form', function (req, res) {
+        var userId = req.params.userId;
+        var formsOfUser = [];
+        for (var i = 0; i < forms.length; i++) {
+            if (forms[i].userId == userId) {
+                formsOfUser.push(forms[i]);
+            }
+        }
+        return formsOfUser;
+    });
+    
+    app.get('/api/assignment/form/:formId', function (req, res) {
+        var formId = req.params.formId;
+        for (var i = 0; i < forms.length; i++) {
+            if (forms[i].id == formId) {
+                res.jsonp(forms[i]);
+            }
+        }
+        res.jsonp(null);
+    });
+    
+    app.post('/api/assignment/user/:userId/form', function (req, res) {
+        var userId = req.params.userId;
+        var newForm = req.body;
+    });
+    
+    app.put('/api/assignment/form/:formId', function (req, res) {
+        var formId = req.params.formId;
+        var newForm = req.params.body;
+        for (var i = 0; i < forms.length; i++) {
+            if (forms[i].id == formId) {
+                forms[i].title = newForm.title;
+                forms[i].userId = newForm.userId;
+                forms[i].fields = newForm.fields;
+            }
+        }
+    });
+    
+    app.delete('/api/assignment/form/:formId', function (req, res) {
+        var formId = req.params.formId;
+        for (var i = 0; i < forms.length; i++) {
+            if (forms[i].id == formId) {
+                forms.splice(i, 1);
+            }
+        }
+    });
+};
 
 /*
 
