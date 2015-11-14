@@ -1,53 +1,39 @@
-module.exports = function(app, model, db) {
-    
-    api = require("../models/form.model.js");
-    var forms = api.findAllForm;
+module.exports = function(app, model) {
     
     app.get('/api/assignment/user/:userId/form', function (req, res) {
         var userId = req.params.userId;
-        var formsOfUser = [];
-        for (var i = 0; i < forms.length; i++) {
-            if (forms[i].userId == userId) {
-                formsOfUser.push(forms[i]);
-            }
-        }
-        res.jsonp(formsOfUser);
+        res.jsonp(model.findFormForUser(userId));
     });
     
     app.get('/api/assignment/form/:formId', function (req, res) {
         var formId = req.params.formId;
-        for (var i = 0; i < forms.length; i++) {
-            if (forms[i].id == formId) {
-                res.jsonp(forms[i]);
-            }
-        }
-        res.jsonp(null);
+        res.jsonp(model.findFormById(formId));
     });
     
     app.post('/api/assignment/user/:userId/form', function (req, res) {
         var userId = req.params.userId;
-        var newForm = req.body;
+        var form_properties = req.body;
+        var newForm = {
+            id : null,
+            title : form_properties.title,
+            userId : userId,
+            fields : form_properties.fields
+        };
+        model.createForm(newForm);
+        res.jsonp(model.findFormForUser(userId));
     });
     
     app.put('/api/assignment/form/:formId', function (req, res) {
         var formId = req.params.formId;
         var newForm = req.params.body;
-        for (var i = 0; i < forms.length; i++) {
-            if (forms[i].id == formId) {
-                forms[i].title = newForm.title;
-                forms[i].userId = newForm.userId;
-                forms[i].fields = newForm.fields;
-            }
-        }
+        model.updateForm(formId, newForm);
+        res.jsonp(model.findFormForUser(userId));
     });
     
     app.delete('/api/assignment/form/:formId', function (req, res) {
         var formId = req.params.formId;
-        for (var i = 0; i < forms.length; i++) {
-            if (forms[i].id == formId) {
-                forms.splice(i, 1);
-            }
-        }
+        model.deleteForm(formId);
+        res.jsonp(model.findFormForUser(userId));
     });
 };
 

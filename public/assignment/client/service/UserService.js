@@ -21,70 +21,59 @@
             deleteUserById : deleteUserById,
             updateUser : updateUser
         };
-        var current_users = [];
         
-        function findUserByUsernameAndPassword(username, password, callback) {
+        function findUserByUsernameAndPassword(username, password) {
             var deferred = $q.defer();
-            var user = null;
-            for (var i = 0; i < current_users.length; i++) {
-                if (current_users[i].username == username && current_users[i].password == password) {
-                    user = current_users[i];
-                }
-            }
             
-            callback(user);
-            $http
+            $http.get('/api/assignment/user?username=' + username + '&password=' + password)
                 .success(function(response) {
                 deferred.resolve(response);
             });
             return deferred.promise;
         }
         
-        function findAllUsers(callback) {
-         
-            //$http.success(callback);
-            callback(current_users);
+        function findAllUsers() {
+            var deferred = $q.defer();
+            
+            $http.get('/api/assignment/user')
+                .success(function(response) {
+                deferred.resolve(response);
+            });
+            return deferred.promise;
         }
         
-        function createUser(user, callback) {
-        
+        function createUser(user) {
+            var deferred = $q.defer();
             var newUser = {
-                
-                userId : guid(),
                 username : user.username,
                 password : user.password,
                 firstName : user.firstName,
                 lastName : user.lastName,
                 email : user.email
             };
-            current_users.push(newUser);
-            callback(newUser);
+            $http.post('/api/assignment/user', newUser)
+                .success(function(response) {
+                deferred.resolve(response);
+            });
+            return deferred.promise;
         }
         
-        function deleteUserById(userId, callback) {
-            for (var i = 0; i < current_users.length; i++) {
-                if (current_users[i].userId == userId) {
-                    current_users.splice(i, 1);
-                    break;
-                }
-            }   
-            callback(current_users);
+        function deleteUserById(userId) {
+            var deferred = $q.defer();
+            $http.delete('/api/assignment/user/' + userId)
+                .success(function(response) {
+                deferred.resolve(response);
+            });
+            return deferred.promise;
         }
     
-        function updateUser(userId, user, callback) {
-            
-            for (var i = 0; i < current_users.length; i++) {
-                if (current_users[i].userId == userId) {
-                    current_users[i].username = user.username;
-                    current_users[i].password = user.password;
-                    current_users[i].firstName = user.firstName;
-                    current_users[i].lastName = user.lastName;
-                    current_users[i].email = user.email;
-                    callback(current_users[i]);
-                }
-            }
-            
-            callback(null);
+        function updateUser(userId, user) {
+            var deferred = $q.defer();
+            $http.put('/api/assignment/user/' + userId, user)
+                .success(function(response) {
+                deferred.resolve(response);
+            });
+            return deferred.promise;
         }
         
         return service;

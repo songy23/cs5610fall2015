@@ -1,69 +1,38 @@
-module.exports = function(app, model, db) {
-    
-    api = require("../models/form.model.js");
-    var forms = api.findAllForm;
+module.exports = function(app, model) {
     
     app.get('/api/assignment/form/:formId/field', function (req, res) {
         var formId = req.params.formId;
-        for (var i = 0; i < forms.length; i++) {
-            if (forms[i].id == formId) {
-                res.jsonp(forms[i].fields);
-            }
+        var form = model.findFormById(formId);
+        if (form != null) {
+            res.jsonp(form.fields);
+        } else {
+            res.jsonp(null);
         }
-        res.jsonp(null);
     });
     
     app.get('/api/assignment/form/:formId/field/:fieldId', function (req, res) {
         var formId = req.params.formId;
         var fieldId = req.params.fieldId;
-        
-        for (var i = 0; i < forms.length; i++) {
-            if (forms[i].id == formId) {
-                for (var j = 0; j < forms[i].fields.length; i++) {
-                    if (forms[i].fields[j].id == fieldId) {
-                        res.jsonp(forms[i].fields[j]);
-                    }
-                }
-            }
-        }
-        res.jsonp(null);
+        res.jsonp(model.findFieldForForm(formId, fieldId));
     });
     
     app.post('/api/assignment/form/:formId/field', function (req, res) {
         var formId = req.params.formId;
+        var newFieldProperties = req.body;
+        res.jsonp(model.addFieldForForm(formId, newFieldProperties));
     });
     
     app.put('/api/assignment/form/:formId/field/:fieldId', function (req, res) {
         var formId = req.params.formId;
         var fieldId = req.params.fieldId;
-        var newField = req.params.body;
-        
-        for (var i = 0; i < forms.length; i++) {
-            if (forms[i].id == formId) {
-                for (var j = 0; j < forms[i].fields.length; i++) {
-                    if (forms[i].fields[j].id == fieldId) {
-                        forms[i].fields[j].label = newField.label;
-                        forms[i].fields[j].type = newField.type;
-                        forms[i].fields[j].placeholder = newField.placeholder;
-                    }
-                }
-            }
-        }
+        var newField = req.body;
+        res.jsonp(model.updateFieldForForm(formId, fieldId, newField));
     });
     
     app.delete('/api/assignment/form/:formId/field/:fieldId', function (req, res) {
         var formId = req.params.formId;
         var fieldId = req.params.fieldId;
-        
-        for (var i = 0; i < forms.length; i++) {
-            if (forms[i].id == formId) {
-                for (var j = 0; j < forms[i].fields.length; i++) {
-                    if (forms[i].fields[j].id == fieldId) {
-                        forms[i].fields.splice(j, 1);
-                    }
-                }
-            }
-        }
+        res.jsonp(model.deleteFieldForForm(formId, fieldId));
     });
 };
 

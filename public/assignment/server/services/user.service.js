@@ -1,71 +1,50 @@
-module.exports = function(app, model, db) {
-    
-    api = require("../models/user.model.js");
-    var users = api.findAllUser;
+module.exports = function(app, model) {
     
     app.post('/api/assignment/user', function (req, res) {
         var newUser = req.body;
         console.log(newUser);
-        users.push(newUser);
-        res.json(users);
+        model.createUser(newUser);
+        res.json(model.findAllUser());
     });
     
     app.get('/api/assignment/user', function (req, res) {
-        res.jsonp(users);
+        res.jsonp(model.findAllUser());
     });
     
     app.get('/api/assignment/user/:id', function (req, res) {
-        var userId = req.params.userId;
-        var user_found = null;
-        for (var i = 0; i < users.length; i++) {
-            if (users[i].id == userId) {
-                user_found = users[i];
-            }
-        }
+        var userId = req.params.id;
+        var user_found = model.findUserById(userId);
         res.jsonp(user_found);
     });
     
     app.get('/api/assignment/user?username=username', function (req, res) {
         var username = req.params.username;
-        var user_found = null;
-        for (var i = 0; i < users.length; i++) {
-            if (users[i].username == username) {
-                user_found = users[i];
-            }
-        }
+        var user_found = model.findUserByUsername(username);
         res.jsonp(user_found);
     });
     
     app.get('/api/assignment/user?username=username&password=password', function (req, res) {
         var username = req.params.username;
         var password = req.params.password;
-        var user_found = null;
-        for (var i = 0; i < users.length; i++) {
-            if (users[i].username == username && users[i].password == password) {
-                user_found = users[i];
-            }
-        }
+        var credential = {
+            username : username,
+            password : password
+        };
+        var user_found = model.findUserByCredentials(credential);
         res.jsonp(user_found);
     });
     
     app.put('/api/assignment/user/:id', function (req, res) {
         var id = req.params.id;
-        for (var i = 0; i < users.length; i++) {
-            if (users[i].id == id) {
-                users[i] = req.body;
-            }
-        }
-        res.json(users);
+        var updated_user = req.body;
+        model.updateUser(id, updated_user);
+        res.json(model.findAllUser());
     });
     
     app.delete('/api/assignment/user/:id', function (req, res) {
         var id = req.params.id;
-        for (var i = 0; i < users.length; i++) {
-            if (users[i].id == id) {
-                users.splice(i, 1);
-            }
-        }
-        res.json(users);
+        model.deleteUser(id);
+        res.json(model.findAllUser());
     });
 };
 
