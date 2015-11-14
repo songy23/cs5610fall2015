@@ -3,16 +3,6 @@
     .module("FormBuilderApp")
     .factory("UserService", UserService);
     
-    function guid() {
-      function s4() {
-        return Math.floor((1 + Math.random()) * 0x10000)
-          .toString(16)
-          .substring(1);
-      }
-      return s4() + s4() + '-' + s4() + '-' + s4() + '-' +
-        s4() + '-' + s4() + s4() + s4();
-    }
-    
     function UserService($http, $q) {
         var service = {
             findUserByUsernameAndPassword : findUserByUsernameAndPassword,
@@ -58,18 +48,18 @@
             return deferred.promise;
         }
         
-        function deleteUserById(userId) {
+        function deleteUserById(id) {
             var deferred = $q.defer();
-            $http.delete('/api/assignment/user/' + userId)
+            $http.delete('/api/assignment/user/' + id)
                 .success(function(response) {
                 deferred.resolve(response);
             });
             return deferred.promise;
         }
     
-        function updateUser(userId, user) {
+        function updateUser(id, user) {
             var deferred = $q.defer();
-            $http.put('/api/assignment/user/' + userId, user)
+            $http.put('/api/assignment/user/' + id, user)
                 .success(function(response) {
                 deferred.resolve(response);
             });

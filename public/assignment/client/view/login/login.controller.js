@@ -9,10 +9,13 @@
         $scope.login = function() {
             UserService.findUserByUsernameAndPassword($scope.username, $scope.password).then(function(response) {
                 if (response != null) {
-                    console.log("Log in successfully"); 
+                    alert("Log in successfully");
+                    console.log(response.id + "  " + response.username); 
                     $rootScope.user = response;
                     $location.url("/profile");
-                } 
+                } else {
+                    alert("Username and Password don't match!");
+                }
             });
         }
     }

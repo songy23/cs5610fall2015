@@ -15,13 +15,14 @@ module.exports = function(app) {
     function createUser(newUser) {
         var guid = Guid.create();
         var user_created = {
-            "id": guid, 
+            "id" : guid, 
             "firstName" : newUser.firstName, 	
             "lastName" : newUser.lastName,	
             "username" : newUser.username, 	
             "password" : newUser.password
         };
         users.push(user_created);
+        return user_created;
     }
     
     function findAllUser() {
@@ -46,8 +47,10 @@ module.exports = function(app) {
                 users[i].password = newUser.password;
                 users[i].firstName = newUser.firstName;
                 users[i].lastName = newUser.lastName;
+                return users[i];
             } 
         }
+        return null;
     }
     
     function deleteUser(id) {

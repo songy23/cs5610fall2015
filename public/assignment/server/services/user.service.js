@@ -3,8 +3,7 @@ module.exports = function(app, model) {
     app.post('/api/assignment/user', function (req, res) {
         var newUser = req.body;
         console.log(newUser);
-        model.createUser(newUser);
-        res.json(model.findAllUser());
+        res.json(model.createUser(newUser));
     });
     
     app.get('/api/assignment/user', function (req, res) {
@@ -37,8 +36,7 @@ module.exports = function(app, model) {
     app.put('/api/assignment/user/:id', function (req, res) {
         var id = req.params.id;
         var updated_user = req.body;
-        model.updateUser(id, updated_user);
-        res.json(model.findAllUser());
+        res.json(model.updateUser(id, updated_user));
     });
     
     app.delete('/api/assignment/user/:id', function (req, res) {

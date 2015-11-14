@@ -14,18 +14,17 @@
                     firstName : "",
                     lastName : "",
                     email : $scope.email
-                }
+                };
 
-                UserService.createUser(new_user, callback);
+                UserService.createUser(new_user).then(function(response) {
+                    alert("Register successfully");
+                    console.log(response.id + "  " + response.username);
+                    $rootScope.user = response;
+                });
                 $location.url("/profile");
             } else {
-                alert("Password doesn't match");
+                alert("Password don't match!");
             }
-        }
-        
-        function callback(user) {
-            console.log(user.username);
-            $rootScope.user = user;
         }
     }
 }) ();

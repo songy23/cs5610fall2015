@@ -19,22 +19,13 @@
             }
             
             if (current_user != null) {
-                var user_found = null;
-                UserService.findUserByUsernameAndPassword(current_user.username, current_user.password, function(user) {
-                    console.log("callback1 succeeds");
-                    user_found = user;
+                UserService.updateUser(current_user.id, updated_user).then(function(response){
+                    console.log(current_user.id);
+                    alert("Profile Updated");
                 });
-                if (user_found != null) {
-                    UserService.updateUser(user_found.userId, updated_user, function (user) {
-                        console.log("callback2 succeeds");
-                        $scope.user = user;
-                        $rootScope.user = user;
-                    });
-                }
             }
             
             $location.url("/profile");
-//            alert("Profile Updated");
         }
     }
     

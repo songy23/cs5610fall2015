@@ -48,8 +48,10 @@ module.exports = function(app) {
                 forms[i].title = newForm.title;
                 forms[i].userId = newForm.userId;
                 forms[i].fields = newForm.fields;
+                return forms[i];
             } 
         }
+        return null;
     }
     
     function deleteForm(id) {

@@ -5,21 +5,16 @@
     
     function FormController($scope, $location, $rootScope, UserService, FormService) {
         $scope.$location = $location;
-        
-        var current_user = $rootScope.user;
         $scope.forms = [];
+        var current_user = $rootScope.user;
         
         if (current_user != null) {
-            FormService.findAllFormsForUser(current_user.userId, function (current_forms) { $scope.forms = current_forms; });
+            FormService.findAllFormsForUser(current_user.id).then(function (response) { $scope.forms = response; });
         }
-        
         
         $scope.addForm = function(newForm) {
             if (current_user != null) {
-                FormService.createFormForUser(current_user.userId, newForm, function(newForm) {
-                    $scope.forms.push(newForm);
-                    console.log("Successfully create new form. Current forms: " + $scope.forms.length);
-                });
+                
             }
         }
         
@@ -28,10 +23,10 @@
         }
         
         $scope.deleteForm = function(index) {
-            var form_to_delete_Id = $scope.forms[index].formId;
+            var form_to_delete_Id = $scope.forms[index].id;
             $scope.forms.splice(index, 1);
-            FormService.deleteFormById(form_to_delete_Id, function(current_forms) {
-                console.log("Length of current_forms: " + current_forms.length);
+            FormService.deleteFormById(form_to_delete_Id).then(function(response) {
+                console.log("Length of current_forms: " + $scope.forms.length);
             });
         }
         
