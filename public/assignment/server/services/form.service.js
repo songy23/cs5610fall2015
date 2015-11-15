@@ -26,7 +26,7 @@ module.exports = function(app, model) {
     app.put('/api/assignment/form/:formId', function (req, res) {
         var formId = req.params.formId;
         var newForm = req.params.body;
-        res.jsonp(model.updateForm(formId, newForm););
+        res.jsonp(model.updateForm(formId, newForm));
     });
     
     app.delete('/api/assignment/form/:formId', function (req, res) {
