@@ -1,5 +1,9 @@
 module.exports = function(app, model) {
     
+    app.get('/api/assignment/form', function (req, res) {
+        res.jsonp(model.findAllForm());
+    });
+    
     app.get('/api/assignment/user/:userId/form', function (req, res) {
         var userId = req.params.userId;
         res.jsonp(model.findFormForUser(userId));

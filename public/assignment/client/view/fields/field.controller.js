@@ -3,9 +3,9 @@
         .module("FormBuilderApp")
         .controller("FieldController", FieldController);
     
-    function FieldController($scope, $location, $rootScope, $routeParams, UserService, FormService, FieldService) {
+    function FieldController($scope, $location, $rootScope, $routeParams, FormService, FieldService) {
         $scope.$location = $location;
-        
+/*        
         var current_user = $rootScope.user;
         var userId = $routeParams.userId;
         var formId = $routeParams.formId;
@@ -14,7 +14,10 @@
             
         }
         
-        Sscope.deleteField(field) {
+        $scope.deleteField(field) {
             
         }
+        
+        */
+    }
 }) ();

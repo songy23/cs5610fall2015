@@ -1,5 +1,5 @@
 var forms = require("./form.mock.json");
-
+var Guid = require('guid');
 module.exports = function(app) {
     
     var api = {
@@ -87,7 +87,7 @@ module.exports = function(app) {
     function findFieldForForm(formId, fieldId) {
         for (var i = 0; i < forms.length; i++) {
             if (forms[i].id == formId) {
-                for (var j = 0; j < forms[i].fields.length; i++) {
+                for (var j = 0; j < forms[i].fields.length; j++) {
                     if (forms[i].fields[j].id == fieldId) {
                         return(forms[i].fields[j]);
                     }
@@ -116,7 +116,7 @@ module.exports = function(app) {
     function updateFieldForForm(formId, fieldId, newField) {
         for (var i = 0; i < forms.length; i++) {
             if (forms[i].id == formId) {
-                for (var j = 0; j < forms[i].fields.length; i++) {
+                for (var j = 0; j < forms[i].fields.length; j++) {
                     if (forms[i].fields[j].id == fieldId) {
                         forms[i].fields[j].label = newField.label;
                         forms[i].fields[j].type = newField.type;
@@ -133,7 +133,7 @@ module.exports = function(app) {
     function deleteFieldForForm(formId, fieldId) {
         for (var i = 0; i < forms.length; i++) {
             if (forms[i].id == formId) {
-                for (var j = 0; j < forms[i].fields.length; i++) {
+                for (var j = 0; j < forms[i].fields.length; j++) {
                     if (forms[i].fields[j].id == fieldId) {
                         forms[i].fields.splice(j, 1);
                     }

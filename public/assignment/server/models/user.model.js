@@ -1,5 +1,5 @@
 var users = require("./user.mock.json");
-
+var Guid = require('guid');
 module.exports = function(app) {
 
     var api = {

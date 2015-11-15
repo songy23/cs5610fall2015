@@ -7,29 +7,26 @@ module.exports = function(app, model) {
     });
     
     app.get('/api/assignment/user', function (req, res) {
-        res.jsonp(model.findAllUser());
+        var username = req.query.username;
+        var password = req.query.password;
+        if (password != null && username != null) {
+            var credential = {
+                username : username,
+                password : password
+            };
+            var user_found = model.findUserByCredentials(credential);
+            res.jsonp(user_found);
+        } else if (username != null) {
+            var user_found = model.findUserByUsername(username);
+            res.jsonp(user_found);
+        } else {
+            res.jsonp(model.findAllUser());
+        }
     });
     
     app.get('/api/assignment/user/:id', function (req, res) {
         var userId = req.params.id;
         var user_found = model.findUserById(userId);
-        res.jsonp(user_found);
-    });
-    
-    app.get('/api/assignment/user?username=username', function (req, res) {
-        var username = req.params.username;
-        var user_found = model.findUserByUsername(username);
-        res.jsonp(user_found);
-    });
-    
-    app.get('/api/assignment/user?username=username&password=password', function (req, res) {
-        var username = req.params.username;
-        var password = req.params.password;
-        var credential = {
-            username : username,
-            password : password
-        };
-        var user_found = model.findUserByCredentials(credential);
         res.jsonp(user_found);
     });
     
