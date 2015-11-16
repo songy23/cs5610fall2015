@@ -7,6 +7,7 @@
         var formModel = this;
         formModel.$location = $location;
         formModel.forms = [];
+        formModel.user = $rootScope.user;
         $rootScope.form = null;
         var current_user = $rootScope.user;
         

@@ -29,6 +29,10 @@
                 templateUrl: "view/fields/field.view.html",
                 controller: "FieldController as fieldModel"
             })
+            .when("/user/:userId/form/:formId/fields", {
+                templateUrl: "view/fields/field.view.html",
+                controller: "FieldController as fieldModel"
+            })
             .when("/admin", {
                 templateUrl: "view/admin/admin.view.html"
             })

@@ -28,7 +28,7 @@
     </button></td>
                     </tr>
                     <tr ng-repeat="form in formModel.forms">
-                        <td><a ng-click="formModel.jumpToField(form)" href="#/user">{{form.title}}</a></td>
+                        <td><a ng-click="formModel.jumpToField(form)" href="#/user/{{formModel.user.id}}/form/{{form.id}}/fields">{{form.title}}</a></td>
                         <td><button type="button" class="btn btn-default" aria-label="Left Align" ng-click="formModel.deleteForm($index)">
   <span class="glyphicon glyphicon-remove" aria-hidden="true"></span>
 </button>

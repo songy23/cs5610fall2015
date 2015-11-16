@@ -7,7 +7,8 @@
         var fieldModel = this;
         fieldModel.$location = $location;
         fieldModel.fields = [];
-        
+        fieldModel.user = $rootScope.user;
+        fieldModel.form = $rootScope.form;
         var current_user = $rootScope.user;
         var current_form = $rootScope.form;
         if (current_form != null) {
