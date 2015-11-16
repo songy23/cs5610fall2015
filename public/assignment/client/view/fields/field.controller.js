@@ -16,7 +16,8 @@
         }
         
         $scope.removeField = function(index) {
-            var field_to_delete = $scope.fields.splice(index, 1);
+            var field_to_delete = $scope.fields[index];
+            $scope.fields.splice(index, 1);
             if (current_form != null) {
                 FieldService.deleteFieldFromForm(current_form.id, field_to_delete.id).then(function(response) {
                     $rootScope.form = response;
@@ -55,10 +56,10 @@
             
             if (newField != null) {
                 if (current_form != null) {
+                    console.log(current_form.id);
                     FieldService.createFieldForForm(current_form.id, newField).then(function(response) {
                         newField = response;
                         console.log(response);
-                        console.log(current_form);
                     });
                 }
                 $scope.fields.push(newField);
