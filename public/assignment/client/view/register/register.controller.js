@@ -5,7 +5,7 @@
     
     function RegisterController($scope, $location, $rootScope, UserService) {
         $scope.$location = $location;
-        
+        $rootScope.form = null;
         $scope.register = function() {
             if ($scope.password == $scope.passwordVerify) {
                 var new_user = {

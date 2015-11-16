@@ -7,7 +7,7 @@
             <h2>Forms</h2>
             <ul class="nav nav-pills">
               <li role="presentation" ng-class="{'active' : $location.url() == '/form'}"><a href="#/form">Forms</a></li>
-              <li role="presentation"><a href="#/field">Fields</a></li>
+              <li role="presentation"><a href="#/user">Fields</a></li>
             </ul>
             <br>
             <table class="table table-striped table-bordered" id="form-tables">
@@ -20,7 +20,7 @@
                 
                 <tbody>
                     <tr>
-                      <td><input type="text" placeholder="name" ng-model="newForm.formName"></td>
+                      <td><input type="text" placeholder="name" ng-model="newForm.title"></td>
                       <td><button type="button" class="btn btn-default" aria-label="Left Align" ng-click="addForm(newForm)">
       <span class="glyphicon glyphicon-plus" aria-hidden="true"></span>
     </button><button type="button" class="btn btn-default" aria-label="Left Align" ng-click="updateForm(newForm)">
@@ -28,7 +28,7 @@
     </button></td>
                     </tr>
                     <tr ng-repeat="form in forms">
-                        <td>{{form.title}}</td>
+                        <td><a ng-click="jumpToField(form)" href="#/user">{{form.title}}</a></td>
                         <td><button type="button" class="btn btn-default" aria-label="Left Align" ng-click="deleteForm($index)">
   <span class="glyphicon glyphicon-remove" aria-hidden="true"></span>
 </button>

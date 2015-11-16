@@ -6,15 +6,25 @@
     function FormController($scope, $location, $rootScope, UserService, FormService) {
         $scope.$location = $location;
         $scope.forms = [];
+        $rootScope.form = null;
         var current_user = $rootScope.user;
         
         if (current_user != null) {
-            FormService.findAllFormsForUser(current_user.id).then(function (response) { $scope.forms = response; });
+            FormService.findAllFormsForUser(current_user.id).then(function(response) {
+                $scope.forms = response; 
+            });
         }
         
         $scope.addForm = function(newForm) {
             if (current_user != null) {
-                
+                var passInForm = {
+                    title : newForm.title,
+                    userId : current_user.id,
+                    fields : []
+                };
+                FormService.createFormForUser(current_user.id, passInForm).then(function(response) {
+                    $scope.forms.push(response); 
+                });
             }
         }
         
@@ -32,6 +42,10 @@
         
         $scope.selectForm = function(index) {
             
+        }
+        
+        $scope.jumpToField = function(form) {
+            $rootScope.form = form;
         }
     }
 }) ();

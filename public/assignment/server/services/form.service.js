@@ -23,8 +23,7 @@ module.exports = function(app, model) {
             userId : userId,
             fields : form_properties.fields
         };
-        model.createForm(newForm);
-        res.jsonp(model.findFormForUser(userId));
+        res.jsonp(model.createForm(newForm));
     });
     
     app.put('/api/assignment/form/:formId', function (req, res) {

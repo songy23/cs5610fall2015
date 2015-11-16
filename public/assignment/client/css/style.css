@@ -1,12 +1,20 @@
-.glyphicon {
+.field-control {
     float: right;
 }
 
-#form-fields {
-    border-style: solid;
-    padding: 10px;
+.field-table {
+    margin: 10px;
 }
 
+#form-fields {
+    padding: 10px;
+    position: relative;
+}
+
+.field-addnew {
+    position: relative;
+    bottom: 0;
+}
 
 #sort1 {
     float: left;

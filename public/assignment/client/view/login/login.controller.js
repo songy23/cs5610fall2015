@@ -5,6 +5,7 @@
     
     function LoginController($scope, $location, $rootScope, UserService) {
         $scope.$location = $location;
+        $rootScope.form = null;
         
         $scope.login = function() {
             UserService.findUserByUsernameAndPassword($scope.username, $scope.password).then(function(response) {

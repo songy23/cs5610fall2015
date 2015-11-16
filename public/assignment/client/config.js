@@ -25,9 +25,9 @@
                 templateUrl: "view/form/form.view.html",
                 controller: "FormController"
             })
-            .when("/field", {
+            .when("/user", {
                 templateUrl: "view/fields/field.view.html",
-                controller: "FieldController"
+                controller: "FieldController as model"
             })
             .when("/admin", {
                 templateUrl: "view/admin/admin.view.html"

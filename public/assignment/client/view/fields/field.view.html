@@ -1,102 +1,90 @@
 <!DOCTYPE html>
 <html lang="en" ng-app="FormBuilderApp">
 
-    <div class="container-fluid" ng-controller="FormController as controller">
+    <div class="container-fluid" ng-controller="FieldController">
       <div class="row">
         <div class="col-sm-9 col-sm-offset-3 col-md-10 col-md-offset-2 main">
             <h2>Forms</h2>
             <ul class="nav nav-pills">
               <li role="presentation"><a href="#/form">Forms</a></li>
-              <li role="presentation" ng-class="{'active' : $location.url() == '/field'}"><a href="#/field">Fields</a></li>
+              <li role="presentation" ng-class="{'active' : $location.url() == '/user'}"><a href="#/user">Fields</a></li>
             </ul>
             <br>
             
             <form class="form-horizontal" id="form-fields">
-                <div class="form-group">
-                    <div class="col-sm-10">First Name:</div>
-                    <div class="col-sm-10">
-                        <input type="text" placeholder="First Name">
-                        <span class="glyphicon glyphicon-align-justify"></span>
-                        <span class="glyphicon glyphicon-remove"></span>
-                        <span class="glyphicon glyphicon-plus"></span>
-                        <span class="glyphicon glyphicon-pencil"></span>
-                    </div>
+                <div class="form-group field-addnew">
+                <table class="table table-striped">
+                    <thead>
+                        <tr>
+                            <th>Label</th>
+                            <th>Type</th>
+                            <th>Input</th>
+                            <th>Actions</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr ng-repeat="field in fields">
+                            <td>{{field.label}}</td>
+                            <td>{{field.type}}</td>
+                            <td ng-switch on="field.type">
+                                <div ng-switch-when="TEXT">
+                                    <input type="text" placeholder="{{field.placeholder}}">
+                                </div>
+                                <div ng-switch-when="TEXTAREA">
+                                    <input type="text" placeholder="{{field.placeholder}}">
+                                </div>
+                                <div ng-switch-when="DATE">
+                                    <input type="date">
+                                </div>
+                                <div ng-switch-when="OPTIONS">
+                                    <select>
+                                        <option ng-repeat="option in field.options">{{option.value}}</option>
+                                    </select>
+                                </div>
+                                <div ng-switch-when="CHECKBOXES">
+                                    <div ng-repeat="option in field.options">
+                                        <input type="checkbox">{{option.value}}
+                                    </div>
+                                </div>
+                                <div ng-switch-when="RADIOS">
+                                    <div ng-repeat="option in field.options">
+                                        <input type="radio">{{option.value}}
+                                    </div>
+                                </div>
+                            </td>
+                            <td>
+                                <button type="button" class="btn btn-default">
+                                    <span class="glyphicon glyphicon-align-justify"></span>
+                                </button>
+                                <button type="button" class="btn btn-default" ng-click="removeField($index)">
+                                    <span class="glyphicon glyphicon-remove"></span>
+                                </button>
+                                <button type="button" class="btn btn-default">
+                                    <span class="glyphicon glyphicon-plus"></span>
+                                </button>
+                                <button type="button" class="btn btn-default">
+                                    <span class="glyphicon glyphicon-pencil"></span>
+                                </button>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
                 </div>
                 
-                <div class="form-group">
-                    <div class="col-sm-10">Last Name:</div>
-                    <div class="col-sm-10">
-                        <input type="text" placeholder="Last Name">
-                        <span class="glyphicon glyphicon-align-justify"></span>
-                        <span class="glyphicon glyphicon-remove"></span>
-                        <span class="glyphicon glyphicon-plus"></span>
-                        <span class="glyphicon glyphicon-pencil"></span>
-                    </div>
-                </div>
-                
-                <div class="form-group">
-                    <div class="col-sm-10">Date of Birth:</div>
-                    <div class="col-sm-10">
-                        <input type="date">
-                        <span class="glyphicon glyphicon-align-justify"></span>
-                        <span class="glyphicon glyphicon-remove"></span>
-                        <span class="glyphicon glyphicon-plus"></span>
-                        <span class="glyphicon glyphicon-pencil"></span>
-                    </div>
-                </div>
-                
-                <div class="form-group">
-                    <div class="col-sm-10">Gender:</div>
-                    <div class="col-sm-10">
-                        <select>
-                            <option>Male</option>
-                            <option>Female</option>
-                        </select>
-                        <span class="glyphicon glyphicon-align-justify"></span>
-                        <span class="glyphicon glyphicon-remove"></span>
-                        <span class="glyphicon glyphicon-plus"></span>
-                        <span class="glyphicon glyphicon-pencil"></span>
-                    </div>
-                </div>
-                
-                <div class="form-group">
-                    <div class="col-sm-10">Role:</div>
-                    <div class="col-sm-10">
-                        <input type="checkbox"> Admin
-                        <span class="glyphicon glyphicon-align-justify"></span>
-                        <span class="glyphicon glyphicon-remove"></span>
-                        <span class="glyphicon glyphicon-plus"></span>
-                        <span class="glyphicon glyphicon-pencil"></span>
-                    </div>
-                    <div class="col-sm-10"><input type="checkbox"> Student</div>
-                    <div class="col-sm-10"><input type="checkbox"> User</div>
-                </div>
-                
-                <div class="form-group">
-                    <div class="col-sm-10">License Agreement:</div>
-                    <div class="col-sm-10">
-                        <div><input type="radio">Yes
-                        <span class="glyphicon glyphicon-align-justify"></span>
-                        <span class="glyphicon glyphicon-remove"></span>
-                        <span class="glyphicon glyphicon-plus"></span>
-                        <span class="glyphicon glyphicon-pencil"></span>
-                        </div>
-                        <div><input type="radio">No</div>
-                    </div>
-                </div>
-                
-            <div class="form-group">
+            <div class="form-group field-addnew">
                 <div class="col-sm-10">Add New Field:</div>
                 <div class="col-sm-10">
-                    <select>
+                    <select ng-model="fieldType">
                         <option>Single Line Text</option>
+                        <option>Multi Line Text</option>
                         <option>Date</option>
                         <option>Dropdown</option>
-                        <option>Checkboxes </option>
-                        <option>Radio buttons</option>
-                        <option>Paragraph Text Field</option>
+                        <option>Checkboxes</option>
+                        <option>Radio Buttons</option>
                     </select>
-                    <span class="glyphicon glyphicon-plus"></span>
+                    <button type="button" class="btn btn-default field-control" aria-label="Right Align" ng-click="addField(fieldType)">
+                        <span class="glyphicon glyphicon-plus"></span>
+                    </button>
                 </div>
             </div>    
             </form>

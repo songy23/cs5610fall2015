@@ -25,6 +25,7 @@ module.exports = function(app) {
             "fields" : newForm.fields
         };
         forms.push(form_created);
+        return form_created;
     }
     
     function findAllForm() {
@@ -89,7 +90,7 @@ module.exports = function(app) {
             if (forms[i].id == formId) {
                 for (var j = 0; j < forms[i].fields.length; j++) {
                     if (forms[i].fields[j].id == fieldId) {
-                        return(forms[i].fields[j]);
+                        return forms[i].fields[j];
                     }
                 }
             }
@@ -107,8 +108,8 @@ module.exports = function(app) {
                     placeholder : newFieldProperties.placeholder
                 };
                 forms[i].fields.push(newField);
+                return newField;
             }
-            return forms[i];
         }
         return null;
     }
@@ -121,9 +122,9 @@ module.exports = function(app) {
                         forms[i].fields[j].label = newField.label;
                         forms[i].fields[j].type = newField.type;
                         forms[i].fields[j].placeholder = newField.placeholder;
+                        return forms[i].fields[j];
                     }
                 }
-                return forms[i];
             }
         }
         
