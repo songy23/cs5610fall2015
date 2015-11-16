@@ -100,13 +100,31 @@ module.exports = function(app) {
     
     function addFieldForForm(formId, newFieldProperties) {
         for (var i = 0; i < forms.length; i++) {
+            
             if (forms[i].id == formId) {
-                var newField = {
-                    id : Guid.create(),
-                    label : newFieldProperties.label,
-                    type : newFieldProperties.type,
-                    placeholder : newFieldProperties.placeholder
-                };
+                var newField = null;
+                if (newFieldProperties.type == "TEXT" || newFieldProperties.type == "TEXTAREA") {
+                    newField = {
+                        id : Guid.create(),
+                        label : newFieldProperties.label,
+                        type : newFieldProperties.type,
+                        placeholder : newFieldProperties.placeholder
+                    };
+                } else if (newFieldProperties.type == "DATE") {
+                    newField = {
+                        id : Guid.create(),
+                        label : newFieldProperties.label,
+                        type : newFieldProperties.type
+                    };
+                } else {
+                    newField = {
+                        id : Guid.create(),
+                        label : newFieldProperties.label,
+                        type : newFieldProperties.type,
+                        options : newFieldProperties.options
+                    };
+                }
+                
                 forms[i].fields.push(newField);
                 return newField;
             }
@@ -114,14 +132,35 @@ module.exports = function(app) {
         return null;
     }
     
-    function updateFieldForForm(formId, fieldId, newField) {
+    function updateFieldForForm(formId, fieldId, newFieldProperties) {
         for (var i = 0; i < forms.length; i++) {
             if (forms[i].id == formId) {
                 for (var j = 0; j < forms[i].fields.length; j++) {
                     if (forms[i].fields[j].id == fieldId) {
-                        forms[i].fields[j].label = newField.label;
-                        forms[i].fields[j].type = newField.type;
-                        forms[i].fields[j].placeholder = newField.placeholder;
+                        var newField = null;
+                        if (newFieldProperties.type == "TEXT" || newFieldProperties.type == "TEXTAREA") {
+                            newField = {
+                                id : forms[i].fields[j].id,
+                                label : newFieldProperties.label,
+                                type : newFieldProperties.type,
+                                placeholder : newFieldProperties.placeholder
+                            };
+                        } else if (newFieldProperties.type == "DATE") {
+                            newField = {
+                                id : forms[i].fields[j].id,
+                                label : newFieldProperties.label,
+                                type : newFieldProperties.type
+                            };
+                        } else {
+                            newField = {
+                                id : forms[i].fields[j].id,
+                                label : newFieldProperties.label,
+                                type : newFieldProperties.type,
+                                options : newFieldProperties.options
+                            };
+                        }
+                        
+                        forms[i].fields[j] = newField;
                         return forms[i].fields[j];
                     }
                 }
