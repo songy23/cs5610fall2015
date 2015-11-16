@@ -3,19 +3,20 @@
         .module("FormBuilderApp")
         .controller("ProfileController", ProfileController);
     
-    function ProfileController($scope, $location, $rootScope, UserService) {
-        $scope.$location = $location;
-        
+    function ProfileController($location, $rootScope, UserService) {
+        var profileModel = this;
+        profileModel.$location = $location;
         var current_user = $rootScope.user;
+        profileModel.user = current_user;
         
-        $scope.update = function() {
+        profileModel.update = function() {
             
             var updated_user = {
-                username : $scope.username,
-                password : $scope.password,
-                firstName : $scope.firstName,
-                lastName : $scope.lastName,
-                email : $scope.email
+                username : profileModel.username,
+                password : profileModel.password,
+                firstName : profileModel.firstName,
+                lastName : profileModel.lastName,
+                email : profileModel.email
             }
             
             if (current_user != null) {

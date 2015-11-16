@@ -11,23 +11,23 @@
             })
             .when("/profile", {
                 templateUrl: "view/profile/profile.view.html",
-                controller: "ProfileController"
+                controller: "ProfileController as profileModel"
             })
             .when("/register", {
                 templateUrl: "view/register/register.view.html",
-                controller: "RegisterController"
+                controller: "RegisterController as registerModel"
             })
             .when("/login", {
                 templateUrl: "view/login/login.view.html",
-                controller: "LoginController"
+                controller: "LoginController as loginModel"
             })
             .when("/form", {
                 templateUrl: "view/form/form.view.html",
-                controller: "FormController"
+                controller: "FormController as formModel"
             })
             .when("/user", {
                 templateUrl: "view/fields/field.view.html",
-                controller: "FieldController as model"
+                controller: "FieldController as fieldModel"
             })
             .when("/admin", {
                 templateUrl: "view/admin/admin.view.html"

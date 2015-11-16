@@ -3,21 +3,22 @@
         .module("FormBuilderApp")
         .controller("FieldController", FieldController);
     
-    function FieldController($scope, $location, $rootScope, $routeParams, FormService, FieldService) {
-        $scope.$location = $location;
-        $scope.fields = [];
+    function FieldController($location, $rootScope, $routeParams, FormService, FieldService) {
+        var fieldModel = this;
+        fieldModel.$location = $location;
+        fieldModel.fields = [];
         
         var current_user = $rootScope.user;
         var current_form = $rootScope.form;
         if (current_form != null) {
             FieldService.getFieldsForForm(current_form.id).then(function(response) {
-                $scope.fields = response;
+                fieldModel.fields = response;
             });
         }
         
-        $scope.removeField = function(index) {
-            var field_to_delete = $scope.fields[index];
-            $scope.fields.splice(index, 1);
+        fieldModel.removeField = function(index) {
+            var field_to_delete = fieldModel.fields[index];
+            fieldModel.fields.splice(index, 1);
             if (current_form != null) {
                 FieldService.deleteFieldFromForm(current_form.id, field_to_delete.id).then(function(response) {
                     $rootScope.form = response;
@@ -25,7 +26,7 @@
             }
         }
         
-        $scope.addField = function(fieldType) {
+        fieldModel.addField = function(fieldType) {
             var newField = null;
             
             if (fieldType == "Single Line Text") {
@@ -62,7 +63,7 @@
                         console.log(response);
                     });
                 }
-                $scope.fields.push(newField);
+                fieldModel.fields.push(newField);
             }
         }
     }

@@ -7,7 +7,7 @@
             <h2>Forms</h2>
             <ul class="nav nav-pills">
               <li role="presentation"><a href="#/form">Forms</a></li>
-              <li role="presentation" ng-class="{'active' : $location.url() == '/user'}"><a href="#/user">Fields</a></li>
+              <li role="presentation" ng-class="{'active' : fieldModel.$location.url() == '/user'}"><a href="#/user">Fields</a></li>
             </ul>
             <br>
             
@@ -23,7 +23,7 @@
                         </tr>
                     </thead>
                     <tbody>
-                        <tr ng-repeat="field in fields">
+                        <tr ng-repeat="field in fieldModel.fields">
                             <td>{{field.label}}</td>
                             <td>{{field.type}}</td>
                             <td ng-switch on="field.type">
@@ -56,7 +56,7 @@
                                 <button type="button" class="btn btn-default">
                                     <span class="glyphicon glyphicon-align-justify"></span>
                                 </button>
-                                <button type="button" class="btn btn-default" ng-click="removeField($index)">
+                                <button type="button" class="btn btn-default" ng-click="fieldModel.removeField($index)">
                                     <span class="glyphicon glyphicon-remove"></span>
                                 </button>
                                 <button type="button" class="btn btn-default">
@@ -82,7 +82,7 @@
                         <option>Checkboxes</option>
                         <option>Radio Buttons</option>
                     </select>
-                    <button type="button" class="btn btn-default field-control" aria-label="Right Align" ng-click="addField(fieldType)">
+                    <button type="button" class="btn btn-default field-control" aria-label="Right Align" ng-click="fieldModel.addField(fieldType)">
                         <span class="glyphicon glyphicon-plus"></span>
                     </button>
                 </div>

@@ -15,8 +15,8 @@
                         <ul class="nav navbar-nav navbar-right">
                             <li ng-class="{'active' : $location.url() == '/register'}"><a href="#/register">Register</a></li>
                             <li ng-class="{'active' : $location.url() == '/login'}"><a href="#/login">Login</a></li>
-                            <li><a href="">Username</a></li>
-                            <li><a href="#/home" >Logout</a></li>
+                            <li><a href="#/profile">{{user.username}}</a></li>
+                            <li><a href="#/home" ng-click="logout()">Logout</a></li>
                         </ul>
                         <form class="navbar-form navbar-right">
                             <input type="text" class="form-control" placeholder="Search...">

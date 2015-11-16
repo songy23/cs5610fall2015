@@ -3,19 +3,20 @@
         .module("FormBuilderApp")
         .controller("FormController", FormController);
     
-    function FormController($scope, $location, $rootScope, UserService, FormService) {
-        $scope.$location = $location;
-        $scope.forms = [];
+    function FormController($location, $rootScope, UserService, FormService) {
+        var formModel = this;
+        formModel.$location = $location;
+        formModel.forms = [];
         $rootScope.form = null;
         var current_user = $rootScope.user;
         
         if (current_user != null) {
             FormService.findAllFormsForUser(current_user.id).then(function(response) {
-                $scope.forms = response; 
+                formModel.forms = response; 
             });
         }
         
-        $scope.addForm = function(newForm) {
+        formModel.addForm = function(newForm) {
             if (current_user != null) {
                 var passInForm = {
                     title : newForm.title,
@@ -23,28 +24,28 @@
                     fields : []
                 };
                 FormService.createFormForUser(current_user.id, passInForm).then(function(response) {
-                    $scope.forms.push(response); 
+                    formModel.forms.push(response); 
                 });
             }
         }
         
-        $scope.updateForm = function(newForm) {
+        formModel.updateForm = function(newForm) {
             
         }
         
-        $scope.deleteForm = function(index) {
-            var form_to_delete_Id = $scope.forms[index].id;
-            $scope.forms.splice(index, 1);
+        formModel.deleteForm = function(index) {
+            var form_to_delete_Id = formModel.forms[index].id;
+            formModel.forms.splice(index, 1);
             FormService.deleteFormById(form_to_delete_Id).then(function(response) {
-                console.log("Length of current_forms: " + $scope.forms.length);
+                console.log("Length of current_forms: " + formModel.forms.length);
             });
         }
         
-        $scope.selectForm = function(index) {
+        formModel.selectForm = function(index) {
             
         }
         
-        $scope.jumpToField = function(form) {
+        formModel.jumpToField = function(form) {
             $rootScope.form = form;
         }
     }

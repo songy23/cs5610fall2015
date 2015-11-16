@@ -3,17 +3,18 @@
         .module("FormBuilderApp")
         .controller("RegisterController", RegisterController);
     
-    function RegisterController($scope, $location, $rootScope, UserService) {
-        $scope.$location = $location;
+    function RegisterController($location, $rootScope, UserService) {
+        var registerModel = this;
+        registerModel.$location = $location;
         $rootScope.form = null;
-        $scope.register = function() {
-            if ($scope.password == $scope.passwordVerify) {
+        registerModel.register = function() {
+            if (registerModel.password == registerModel.passwordVerify) {
                 var new_user = {
-                    username : $scope.username,
-                    password : $scope.password,
+                    username : registerModel.username,
+                    password : registerModel.password,
                     firstName : "",
                     lastName : "",
-                    email : $scope.email
+                    email : registerModel.email
                 };
 
                 UserService.createUser(new_user).then(function(response) {
