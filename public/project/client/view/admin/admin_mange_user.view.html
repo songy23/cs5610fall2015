@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en" ng-app="ReadingFun">
+    <body ng-controller="AdminController">
+    <div class="container-fluid">
+                <div class="row">
+                    <div class="col-lg-8 review-table">
+                        <h2 class="header2">Administrator</h2>
+                        <label style="margin: 10px;">Normal user cannot access this page</label>
+                        <ul class="nav nav-pills">
+              <li role="presentation" class="active"><a href="admin_mangeUser.view.html">Manage Users</a></li>
+              <li role="presentation"><a href="admin_manageReview.view.html">Edit Reviews</a></li>
+            </ul>
+                        <div class="table-responsive">
+                            <table class="table table-hover">
+                                <thead>
+                                    <tr>
+                                        <th>UserName</th>
+                                        <th>Last Login</th>
+                                        <th>Password</th>
+                                        <th>Action</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr>
+                                        <td><input type="text"></td>
+                                        <td></td>
+                                        <td><input type="text"></td>
+                                        <td><span class="glyphicon glyphicon-plus"></span><span class="glyphicon glyphicon-ok"></span></td>
+                                    </tr>
+                                    <tr>
+                                        <td><a>User1011</a></td>
+                                        <td>Oct 4, 2016</td>
+                                        <td>*********</td>
+                                        <td><span class="glyphicon glyphicon-pencil"></span><span class="glyphicon glyphicon-trash"></span></td>
+                                    </tr>
+                                    <tr>
+                                        <td><a>User2009</a></td>
+                                        <td>Oct 28, 2016</td>
+                                        <td>*********</td>
+                                        <td><span class="glyphicon glyphicon-pencil"></span><span class="glyphicon glyphicon-trash"></span></td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                
+                </div>
+            </div>
+            <!-- /.container-fluid -->
+    </body>
+</html>

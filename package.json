@@ -30,7 +30,9 @@
     "node-uuid": "^1.4.7",
     "q": "^1.4.1"
   },
-  "devDependencies": {},
+  "devDependencies": {
+    "mongoose": "^4.2.6"
+  },
   "bundleDependencies": [],
   "private": true,
   "main": "server.js"
