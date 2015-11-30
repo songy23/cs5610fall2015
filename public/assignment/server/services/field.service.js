@@ -2,37 +2,46 @@ module.exports = function(app, model) {
     
     app.get('/api/assignment/form/:formId/field', function (req, res) {
         var formId = req.params.formId;
-        var form = model.findFormById(formId);
-        if (form != null) {
-            res.jsonp(form.fields);
-        } else {
-            res.jsonp(null);
-        }
+        model.findFormById(formId).then(function(result) {
+            if (result != null) {
+                res.jsonp(result.fields);
+            } else {
+                res.jsonp(null);
+            }
+        });
     });
     
     app.get('/api/assignment/form/:formId/field/:fieldId', function (req, res) {
         var formId = req.params.formId;
         var fieldId = req.params.fieldId;
-        res.jsonp(model.findFieldForForm(formId, fieldId));
+        model.findFieldForForm(formId, fieldId).then(function(result) {
+            res.jsonp(result); 
+        });
     });
     
     app.post('/api/assignment/form/:formId/field', function (req, res) {
         var formId = req.params.formId;
         var newFieldProperties = req.body;
-        res.jsonp(model.addFieldForForm(formId, newFieldProperties));
+        model.addFieldForForm(formId, newFieldProperties).then(function(result) {
+            res.jsonp(result); 
+        });
     });
     
     app.put('/api/assignment/form/:formId/field/:fieldId', function (req, res) {
         var formId = req.params.formId;
         var fieldId = req.params.fieldId;
         var newField = req.body;
-        res.jsonp(model.updateFieldForForm(formId, fieldId, newField));
+        model.updateFieldForForm(formId, fieldId, newField).then(function(result) {
+            res.jsonp(result); 
+        });
     });
     
     app.delete('/api/assignment/form/:formId/field/:fieldId', function (req, res) {
         var formId = req.params.formId;
         var fieldId = req.params.fieldId;
-        res.jsonp(model.deleteFieldForForm(formId, fieldId));
+        model.deleteFieldForForm(formId, fieldId).then(function(result) {
+            res.jsonp(result); 
+        });
     });
 };
 

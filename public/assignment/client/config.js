@@ -11,27 +11,38 @@
             })
             .when("/profile", {
                 templateUrl: "view/profile/profile.view.html",
-                controller: "ProfileController as profileModel"
+                controller: "ProfileController",
+                controllerAs: "profileModel"
             })
             .when("/register", {
                 templateUrl: "view/register/register.view.html",
-                controller: "RegisterController as registerModel"
+                controller: "RegisterController",
+                controllerAs: "registerModel"
             })
             .when("/login", {
                 templateUrl: "view/login/login.view.html",
-                controller: "LoginController as loginModel"
+                controller: "LoginController",
+                controllerAs: "loginModel"
             })
             .when("/form", {
                 templateUrl: "view/form/form.view.html",
-                controller: "FormController as formModel"
+                controller: "FormController",
+                controllerAs: "formModel"
             })
             .when("/user", {
                 templateUrl: "view/fields/field.view.html",
-                controller: "FieldController as fieldModel"
+                controller: "FieldController",
+                controllerAs: "fieldModel"
             })
             .when("/user/:userId/form/:formId/fields", {
                 templateUrl: "view/fields/field.view.html",
-                controller: "FieldController as fieldModel"
+                controller: "FieldController",
+                controllerAs: "fieldModel"
+            })
+            .when("/form/:formId/fields", {
+                templateUrl: "view/fields/field.view.html",
+                controller: "FieldController",
+                controllerAs: "fieldModel"
             })
             .when("/admin", {
                 templateUrl: "view/admin/admin.view.html"

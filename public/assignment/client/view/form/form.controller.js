@@ -39,6 +39,7 @@
             formModel.forms.splice(index, 1);
             FormService.deleteFormById(form_to_delete_Id).then(function(response) {
                 console.log("Length of current_forms: " + formModel.forms.length);
+                console.log(response);
             });
         }
         

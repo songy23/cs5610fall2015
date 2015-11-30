@@ -37,7 +37,7 @@ module.exports = function(app, mongoose, db) {
     function findFormById(id) {
         var deferred = q.defer();
         FormModel.find({_id : id}, function(err, results) {
-            if (results.length != 0) {
+            if (results != undefined && results.length != 0) {
                 deferred.resolve(results[0]);
             } else {
                 deferred.resolve(null);
@@ -66,7 +66,11 @@ module.exports = function(app, mongoose, db) {
     }
     
     function deleteForm(id) {
-        FormModel.remove({_id : id});
+        var deferred = q.defer();
+        FormModel.remove({_id : id}, function(err, results) {
+            deferred.resolve(results);
+        });
+        return deferred.promise;
     }
     
     

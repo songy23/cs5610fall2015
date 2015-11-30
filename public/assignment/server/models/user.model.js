@@ -63,7 +63,11 @@ module.exports = function(app, mongoose, db) {
     }
     
     function deleteUser(id) {
-        UserModel.remove({_id : id});
+        var deferred = q.defer();
+        UserModel.remove({_id : id}, function(err, results) {
+            deferred.resolve(results[0]);
+        });
+        return deferred.promise;
     }
     
     function findUserByUsername(username) {

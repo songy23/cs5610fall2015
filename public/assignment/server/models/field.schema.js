@@ -2,7 +2,10 @@ module.exports = function(app, mongoose) {
     
     var FieldSchema = new mongoose.Schema({
         id : String,
-        type : String,
+        type : {
+            type : String,
+            enum : ["TEXT", "TEXTAREA", "RADIO", "CHECKBOX", "SELECT", "DATE", "EMAIL"]
+        },
         label : {type : String, default : "label"},
         placeholder : {type : String, default : "placeholder"},
         options : [

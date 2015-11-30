@@ -1,23 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="900d780f-46d3-46b1-ba38-fa4f1afe54cd" name="Default" comment="">
-      <change type="DELETED" beforePath="$PROJECT_DIR$/public/assignment/server/models/form.mock.json" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/public/assignment/server/models/user.mock.json" afterPath="" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/public/assignment/server/app.js" afterPath="$PROJECT_DIR$/public/assignment/server/app.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/public/assignment/client/view/fields/field.controller.js" afterPath="$PROJECT_DIR$/public/assignment/client/view/fields/field.controller.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/public/assignment/server/models/field.schema.js" afterPath="$PROJECT_DIR$/public/assignment/server/models/field.schema.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/public/assignment/client/view/form/form.controller.js" afterPath="$PROJECT_DIR$/public/assignment/client/view/form/form.controller.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/public/assignment/server/models/form.model.js" afterPath="$PROJECT_DIR$/public/assignment/server/models/form.model.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/public/assignment/server/models/form.schema.js" afterPath="$PROJECT_DIR$/public/assignment/server/models/form.schema.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/public/assignment/client/view/login/login.controller.js" afterPath="$PROJECT_DIR$/public/assignment/client/view/login/login.controller.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/public/assignment/client/view/profile/profile.controller.js" afterPath="$PROJECT_DIR$/public/assignment/client/view/profile/profile.controller.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/public/assignment/client/view/register/register.controller.js" afterPath="$PROJECT_DIR$/public/assignment/client/view/register/register.controller.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/server.js" afterPath="$PROJECT_DIR$/server.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/public/assignment/server/models/user.model.js" afterPath="$PROJECT_DIR$/public/assignment/server/models/user.model.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/public/assignment/server/models/user.schema.js" afterPath="$PROJECT_DIR$/public/assignment/server/models/user.schema.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/public/assignment/server/services/user.service.js" afterPath="$PROJECT_DIR$/public/assignment/server/services/user.service.js" />
-    </list>
+    <list default="true" id="900d780f-46d3-46b1-ba38-fa4f1afe54cd" name="Default" comment="" />
     <ignored path="github.iws" />
     <ignored path=".idea/workspace.xml" />
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />

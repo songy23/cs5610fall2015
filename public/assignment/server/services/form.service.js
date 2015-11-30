@@ -1,17 +1,23 @@
 module.exports = function(app, model) {
     
     app.get('/api/assignment/form', function (req, res) {
-        res.jsonp(model.findAllForm());
+        model.findAllForm().then(function(result) {
+            res.jsonp(result); 
+        });
     });
     
     app.get('/api/assignment/user/:userId/form', function (req, res) {
         var userId = req.params.userId;
-        res.jsonp(model.findFormForUser(userId));
+        model.findFormForUser(userId).then(function(result) {
+            res.jsonp(result); 
+        });
     });
     
     app.get('/api/assignment/form/:formId', function (req, res) {
         var formId = req.params.formId;
-        res.jsonp(model.findFormById(formId));
+        model.findFormById(formId).then(function(result) {
+            res.jsonp(result); 
+        });
     });
     
     app.post('/api/assignment/user/:userId/form', function (req, res) {
@@ -23,19 +29,24 @@ module.exports = function(app, model) {
             userId : userId,
             fields : form_properties.fields
         };
-        res.jsonp(model.createForm(newForm));
+        model.createForm(newForm).then(function(result) {
+            res.jsonp(result); 
+        });
     });
     
     app.put('/api/assignment/form/:formId', function (req, res) {
         var formId = req.params.formId;
         var newForm = req.params.body;
-        res.jsonp(model.updateForm(formId, newForm));
+        model.updateForm(formId, newForm).then(function(result) {
+            res.jsonp(result); 
+        });
     });
     
     app.delete('/api/assignment/form/:formId', function (req, res) {
         var formId = req.params.formId;
-        model.deleteForm(formId);
-        res.jsonp(null);
+        model.deleteForm(formId).then(function(result) {
+            res.jsonp(result); 
+        });
     });
 };
 

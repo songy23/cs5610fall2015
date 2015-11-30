@@ -9,7 +9,7 @@ module.exports = function(app, model) {
     });
     
     app.get('/api/assignment/user', function (req, res) {
-        console.log("hey");
+//        console.log("hey");
         var username = req.query.username;
         var password = req.query.password;
         if (password != null && username != null) {
