@@ -23,10 +23,9 @@
                 UserService.updateUser(current_user._id, updated_user).then(function(response){
                     console.log(current_user._id);
                     alert("Profile Updated");
+                    $location.url("/profile");
                 });
             }
-            
-            $location.url("/profile");
         }
     }
     

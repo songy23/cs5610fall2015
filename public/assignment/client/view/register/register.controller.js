@@ -21,8 +21,9 @@
                     alert("Register successfully");
                     console.log(response._id + "  " + response.username);
                     $rootScope.user = response;
+//                    console.log($rootScope.user);
+                    $location.url("/profile");
                 });
-                $location.url("/profile");
             } else {
                 alert("Password don't match!");
             }
