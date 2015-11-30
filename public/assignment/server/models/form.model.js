@@ -1,6 +1,8 @@
-var forms = require("./form.mock.json");
+var q = require("q");
 var Guid = require('guid');
-module.exports = function(app) {
+module.exports = function(app, mongoose, db) {
+    var FormSchema = require("./form.schema.js")(app, mongoose);
+    var FormModel = mongoose.model("form", FormSchema);
     
     var api = {
         createForm : createForm,
@@ -17,91 +19,106 @@ module.exports = function(app) {
     };
     
     function createForm(newForm) {
-        var guid = Guid.create();
-        var form_created = {
-            "id" : guid, 
-            "title" : newForm.title, 
-            "userId" : newForm.userId,
-            "fields" : newForm.fields
-        };
-        forms.push(form_created);
-        return form_created;
+        var deferred = q.defer();
+        FormModel.create(newForm, function(err, results) {
+            deferred.resolve(results);
+        });
+        return deferred.promise;
     }
     
     function findAllForm() {
-        return forms;
+        var deferred = q.defer();
+        FormModel.find({}, function(err, results) {
+            deferred.resolve(results);
+        });
+        return deferred.promise;
     }
     
     function findFormById(id) {
-        var i = 0;
-        for (i = 0; i < forms.length; i++) {
-            if (forms[i].id == id) {
-                return forms[i];
-            } 
-        }
-        return null;
+        var deferred = q.defer();
+        FormModel.find({_id : id}, function(err, results) {
+            if (results.length != 0) {
+                deferred.resolve(results[0]);
+            } else {
+                deferred.resolve(null);
+            }
+        });
+        return deferred.promise;
     }
     
     function updateForm(id, newForm) {
-        var i = 0;
-        for (i = 0; i < forms.length; i++) {
-            if (forms[i].id == id) {
-                forms[i].title = newForm.title;
-                forms[i].userId = newForm.userId;
-                forms[i].fields = newForm.fields;
-                return forms[i];
-            } 
-        }
-        return null;
+        var deferred = q.defer();
+        FormModel.update(
+            {_id : id}, 
+            {
+                title : newForm.title,
+                userId : newForm.userId,
+                fields : newForm.fields
+            },
+            function(err, results) {
+                if (results.length != 0) {
+                    deferred.resolve(results[0]);
+                } else {
+                    deferred.resolve(null);
+                }
+            });
+        return deferred.promise;
     }
     
     function deleteForm(id) {
-        var i = 0;
-        for (i = 0; i < forms.length; i++) {
-            if (forms[i].id == id) {
-                forms.splice(i, 1);
-            } 
-        }
+        FormModel.remove({_id : id});
     }
     
     
     function findFormByTitle(title) {
-        var i = 0;
-        for (i = 0; i < forms.length; i++) {
-            if (forms[i].title == title) {
-                return forms[i];
-            } 
-        }
-        return null;
+        var deferred = q.defer();
+        FormModel.find({title : title}, function(err, results) {
+            if (results.length != 0) {
+                deferred.resolve(results[0]);
+            } else {
+                deferred.resolve(null);
+            }
+        });
+        return deferred.promise;
     }
     
     function findFormForUser(userId) {
-        var formsOfUser = [];
-        for (var i = 0; i < forms.length; i++) {
-            if (forms[i].userId == userId) {
-                formsOfUser.push(forms[i]);
+        var deferred = q.defer();
+        FormModel.find({userId : userId}, function(err, results) {
+            if (results.length != 0) {
+                deferred.resolve(results);
+            } else {
+                deferred.resolve(null);
             }
-        }
-        return formsOfUser;
+        });
+        return deferred.promise;
     }
     
     function findFieldForForm(formId, fieldId) {
-        for (var i = 0; i < forms.length; i++) {
-            if (forms[i].id == formId) {
-                for (var j = 0; j < forms[i].fields.length; j++) {
-                    if (forms[i].fields[j].id == fieldId) {
-                        return forms[i].fields[j];
+        var deferred = q.defer();
+        FormModel.find({_id : formId}, function(err, results) {
+            if (results.length == 0) {
+                deferred.resolve(null);
+            } else {
+                var form = results[0];
+                for (var j = 0; j < form.fields.length; j++) {
+                    if (form.fields[j].id == fieldId) {
+                        deferred.resolve(form.fields[j]);
                     }
                 }
+                deferred.resolve(null);
             }
-        }
-        return null;
+        });
+        return deferred.promise;
     }
     
     function addFieldForForm(formId, newFieldProperties) {
-        for (var i = 0; i < forms.length; i++) {
-            
-            if (forms[i].id == formId) {
+        var deferred = q.defer();
+        
+        FormModel.find({_id : formId}, function(err, results) {
+            if (results.length == 0) {
+                deferred.resolve(null);
+            } else {
                 var newField = null;
                 if (newFieldProperties.type == "TEXT" || newFieldProperties.type == "TEXTAREA") {
                     newField = {
@@ -125,64 +142,78 @@ module.exports = function(app) {
                     };
                 }
                 
-                forms[i].fields.push(newField);
-                return newField;
+                results[0].fields.push(newField);
+                results[0].save(function(err, result) {
+                    deferred.resolve(result);
+                });
             }
-        }
-        return null;
+        });
+        return deferred.promise;
     }
     
     function updateFieldForForm(formId, fieldId, newFieldProperties) {
-        for (var i = 0; i < forms.length; i++) {
-            if (forms[i].id == formId) {
-                for (var j = 0; j < forms[i].fields.length; j++) {
-                    if (forms[i].fields[j].id == fieldId) {
+        var deferred = q.defer();
+        FormModel.find({_id : formId}, function(err, results) {
+            if (results.length == 0) {
+                deferred.resolve(null);
+            } else {
+                for (var j = 0; j < results[0].fields.length; j++) {
+                    if (results[0].fields[j].id == fieldId) {
                         var newField = null;
                         if (newFieldProperties.type == "TEXT" || newFieldProperties.type == "TEXTAREA") {
                             newField = {
-                                id : forms[i].fields[j].id,
+                                id : fieldId,
                                 label : newFieldProperties.label,
                                 type : newFieldProperties.type,
                                 placeholder : newFieldProperties.placeholder
                             };
                         } else if (newFieldProperties.type == "DATE") {
                             newField = {
-                                id : forms[i].fields[j].id,
+                                id : fieldId,
                                 label : newFieldProperties.label,
                                 type : newFieldProperties.type
                             };
                         } else {
                             newField = {
-                                id : forms[i].fields[j].id,
+                                id : fieldId,
                                 label : newFieldProperties.label,
                                 type : newFieldProperties.type,
                                 options : newFieldProperties.options
                             };
                         }
                         
-                        forms[i].fields[j] = newField;
-                        return forms[i].fields[j];
+                        results[0].fields[j] = newField;
                     }
                 }
+                results[0].save(function(err, result) {
+                    deferred.resolve(result);
+                });
             }
-        }
+        });
         
-        return null;
+        return deferred.promise;
     }
     
     function deleteFieldForForm(formId, fieldId) {
-        for (var i = 0; i < forms.length; i++) {
-            if (forms[i].id == formId) {
-                for (var j = 0; j < forms[i].fields.length; j++) {
-                    if (forms[i].fields[j].id == fieldId) {
-                        forms[i].fields.splice(j, 1);
+        var deferred = q.defer();
+        
+        FormModel.find({_id : formId}, function(err, results) {
+            if (results.length == 0) {
+                deferred.resolve(null);
+            } else {
+                for (var j = 0; j < results[0].fields.length; j++) {
+                    if (results[0].fields[j].id == fieldId) {
+                        results[0].fields.splice(j, 1);
                     }
                 }
-                return forms[i];
+                
+                results[0].save(function(err, result) {
+                    deferred.resolve(result);
+                });
             }
-        }
+        });
         
-        return null;
+        return deferred.promise;
     }
     
     return api;

@@ -12,7 +12,7 @@
         var current_user = $rootScope.user;
         
         if (current_user != null) {
-            FormService.findAllFormsForUser(current_user.id).then(function(response) {
+            FormService.findAllFormsForUser(current_user._id).then(function(response) {
                 formModel.forms = response; 
             });
         }
@@ -21,10 +21,10 @@
             if (current_user != null) {
                 var passInForm = {
                     title : newForm.title,
-                    userId : current_user.id,
+                    userId : current_user._id,
                     fields : []
                 };
-                FormService.createFormForUser(current_user.id, passInForm).then(function(response) {
+                FormService.createFormForUser(current_user._id, passInForm).then(function(response) {
                     formModel.forms.push(response); 
                 });
             }
@@ -35,7 +35,7 @@
         }
         
         formModel.deleteForm = function(index) {
-            var form_to_delete_Id = formModel.forms[index].id;
+            var form_to_delete_Id = formModel.forms[index]._id;
             formModel.forms.splice(index, 1);
             FormService.deleteFormById(form_to_delete_Id).then(function(response) {
                 console.log("Length of current_forms: " + formModel.forms.length);

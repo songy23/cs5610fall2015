@@ -20,8 +20,8 @@
             }
             
             if (current_user != null) {
-                UserService.updateUser(current_user.id, updated_user).then(function(response){
-                    console.log(current_user.id);
+                UserService.updateUser(current_user._id, updated_user).then(function(response){
+                    console.log(current_user._id);
                     alert("Profile Updated");
                 });
             }

@@ -12,7 +12,7 @@
         var current_user = $rootScope.user;
         var current_form = $rootScope.form;
         if (current_form != null) {
-            FieldService.getFieldsForForm(current_form.id).then(function(response) {
+            FieldService.getFieldsForForm(current_form._id).then(function(response) {
                 fieldModel.fields = response;
             });
         }
@@ -21,7 +21,7 @@
             var field_to_delete = fieldModel.fields[index];
             fieldModel.fields.splice(index, 1);
             if (current_form != null) {
-                FieldService.deleteFieldFromForm(current_form.id, field_to_delete.id).then(function(response) {
+                FieldService.deleteFieldFromForm(current_form._id, field_to_delete.id).then(function(response) {
                     $rootScope.form = response;
                 });
             }
@@ -58,8 +58,8 @@
             
             if (newField != null) {
                 if (current_form != null) {
-                    console.log(current_form.id);
-                    FieldService.createFieldForForm(current_form.id, newField).then(function(response) {
+                    console.log(current_form._id);
+                    FieldService.createFieldForForm(current_form._id, newField).then(function(response) {
                         newField = response;
                         console.log(response);
                     });

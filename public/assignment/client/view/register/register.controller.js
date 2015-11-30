@@ -19,7 +19,7 @@
 
                 UserService.createUser(new_user).then(function(response) {
                     alert("Register successfully");
-                    console.log(response.id + "  " + response.username);
+                    console.log(response._id + "  " + response.username);
                     $rootScope.user = response;
                 });
                 $location.url("/profile");

@@ -15,7 +15,7 @@
             UserService.findUserByUsernameAndPassword(loginModel.username, loginModel.password).then(function(response) {
                 if (response != null) {
                     alert("Log in successfully");
-                    console.log(response.id + "  " + response.username); 
+                    console.log(response._id + "  " + response.username); 
                     $rootScope.user = response;
                     $location.url("/profile");
                 } else {
