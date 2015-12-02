@@ -1,7 +1,7 @@
 var q = require("q");
 module.exports = function(app, mongoose, db) {
     var ReviewSchema = require("./review.schema.js")(app, mongoose);
-    var ReviewModel = mongoose.model("review", ReviewSchema);
+    var ReviewModel = mongoose.model("project.review", ReviewSchema);
     
     var api = {
         createReviewForUser : createReviewForUser,

@@ -1,7 +1,7 @@
 var q = require("q");
 module.exports = function(app, mongoose, db) {
     var OrderSchema = require("./order.schema.js")(app, mongoose);
-    var OrderModel = mongoose.model("order", OrderSchema);
+    var OrderModel = mongoose.model("project.order", OrderSchema);
     
     var api = {
         createOrderForUser : createOrderForUser,
