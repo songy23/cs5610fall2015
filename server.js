@@ -22,5 +22,6 @@ app.use(bodyParser.json());
 //});
 
 require("./public/assignment/server/app.js")(app, mongoose, db);
+require("./public/project/server/app.js")(app, mongoose, db);
 
 app.listen(port, ipaddress);

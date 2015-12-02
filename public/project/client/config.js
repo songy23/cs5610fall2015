@@ -26,6 +26,10 @@
                 templateUrl: "view/admin/admin.view.html",
                 controller: "AdminController"
             })
+            .when("/retrieve", {
+                templateUrl: "view/retrieve_pwd/retrieve_pwd.view.html",
+                controller: "Retrieve0Controller"
+            })
             .otherwise({
                 redirectTo: "/"
             });

@@ -50,8 +50,9 @@ module.exports = function(app, mongoose, db) {
                     }
             },
             function(err, result) {
-                deferred.resolve(result);
-                console.log(result);
+                UserModel.findOne({_id : id}, function(err, result) {
+                    deferred.resolve(result);
+                });
             });
         return deferred.promise;
     }

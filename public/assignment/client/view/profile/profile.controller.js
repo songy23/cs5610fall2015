@@ -21,7 +21,8 @@
             
             if (current_user != null) {
                 UserService.updateUser(current_user._id, updated_user).then(function(response){
-                    console.log(current_user._id);
+                    console.log(response._id);
+                    $rootScope.user = response;
                     alert("Profile Updated");
                     $location.url("/profile");
                 });
