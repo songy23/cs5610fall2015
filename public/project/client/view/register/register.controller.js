@@ -3,7 +3,7 @@
         .module("ReadingFun")
         .controller("RegisterController", RegisterController);
     
-    function RegisterController($scope, $location, $rootScope) {
+    function RegisterController($scope, $location, $rootScope, UserService) {
         var registerModel = this;
         registerModel.$location = $location;
         $rootScope.form = null;

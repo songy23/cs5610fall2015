@@ -235,7 +235,7 @@ ul.alert-dropdown {
 }
 
 .registration-label {
-    color: white;
+    color: black;
 }
 
 .profile {
@@ -255,7 +255,7 @@ ul.alert-dropdown {
 
 .retrieve-password {
     font-size: 25px;
-    color: lightgray;
+    color: blueviolet;
 }
 
 .current-username {
@@ -272,7 +272,7 @@ ul.alert-dropdown {
 }
 
 .review-table {
-    background-color: white;
+    background-color: black;
 }
 
 .header2 {

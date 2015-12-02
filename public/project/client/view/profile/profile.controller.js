@@ -3,7 +3,7 @@
         .module("ReadingFun")
         .controller("ProfileController", ProfileController);
     
-    function ProfileController($scope, $location, $rootScope) {
+    function ProfileController($scope, $location, $rootScope, UserService) {
         var profileModel = this;
         profileModel.$location = $location;
         var current_user = $rootScope.user;
