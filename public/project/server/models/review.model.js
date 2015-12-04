@@ -45,9 +45,9 @@ module.exports = function(app, mongoose, db) {
         return deferred.promise;
     }
     
-    function findReviewForBook(bookId) {
+    function findReviewForBook(isbn) {
         var deferred = q.defer();
-        ReviewModel.find({bookId : bookId}, function(err, results) {
+        ReviewModel.find({isbn : isbn}, function(err, results) {
             deferred.resolve(results);
         });
         return deferred.promise;

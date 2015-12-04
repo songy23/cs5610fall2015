@@ -20,9 +20,9 @@ module.exports = function(app, model) {
         });
     });
     
-    app.get('/api/project/:bookId/review', function (req, res) {
-        var bookId = req.params.userId;
-        model.findReviewForBook(bookId).then(function(result) {
+    app.get('/api/project/:isbn/review', function (req, res) {
+        var isbn = req.params.isbn;
+        model.findReviewForBook(isbn).then(function(result) {
             res.jsonp(result); 
         });
     });
