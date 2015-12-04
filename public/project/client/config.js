@@ -36,18 +36,18 @@
                 controller: "RetrieveController",
                 controllerAs: "retrieveModel"
             })
-            .when("/book/:bookId", {
-                templateUrl: "view/book/book_detail.view.html",
+            .when("/book/:isbn", {
+                templateUrl: "view/book/book_details.view.html",
                 controller: "BookController",
                 controllerAs: "bookModel"
             })
             .when("/review/:reviewId", {
-                templateUrl: "view/review/review_detail.view.html",
+                templateUrl: "view/review/review_details.view.html",
                 controller: "ReviewController",
                 controllerAs: "reviewModel"
             })
             .when("/user/:userId/order/:orderId", {
-                templateUrl: "view/order/order_detail.view.html",
+                templateUrl: "view/order/order_details.view.html",
                 controller: "OrderController",
                 controllerAs: "orderModel"
             })

@@ -6,7 +6,7 @@
     function HeaderController($scope, $location, $rootScope) {
         $scope.login = function() {
             if ($rootScope.user == null) {
-                $scope.$location = "#/login";
+//                $location.path("#/login");
             } else {
                 alert("You have already logged in!");
             }

@@ -44,5 +44,10 @@
 //            console.log($scope.books);
 //            console.log(bookJSON);
         }
+        
+        $scope.jumpToDetails = function($index) {
+            $rootScope.book = $scope.books[$index];
+            $location = "/book/" + $rootScope.book.isbn[0];
+        }
     }
 }) ();

@@ -10,22 +10,20 @@
         profileModel.user = current_user;
         
         profileModel.update = function() {
-            if (profileModel.username == null) {
-                alert("Username cannot be null!");
-                return;
-            }
-            
-            var updated_user = {
-                username : profileModel.username,
-                password : profileModel.password,
-                firstName : profileModel.firstName,
-                lastName : profileModel.lastName,
-                email : profileModel.email,
-                dob : profileModel.dob,
-                address : profileModel.address
-            }
-            
             if (current_user != null) {
+                var updated_user = {
+                    username : current_user.username,
+                    password : profileModel.password,
+                    firstName : profileModel.firstName,
+                    lastName : profileModel.lastName,
+                    email : profileModel.email,
+                    dob : profileModel.dob,
+                    address : profileModel.address,
+                    orders : current_user.orders,
+                    isAdmin : current_user.isAdmin,
+                    friends : current_user.friends
+                };
+                
                 UserService.updateUser(current_user._id, updated_user).then(function(response){
                     console.log(response._id);
                     $rootScope.user = response;

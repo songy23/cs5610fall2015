@@ -56,7 +56,7 @@
                     <tbody>
                         <tr ng-repeat="book in books">
                             <td>{{$index}}</td>
-                            <td>{{book.title}}</td>
+                            <td><a ng-click="jumpToDetails($index)">{{book.title}}</a></td>
                             <td ng-repeat="author in book.author_name">{{author + " "}}</td>
                             <td>{{book.isbn[0]}}</td>
                         </tr>

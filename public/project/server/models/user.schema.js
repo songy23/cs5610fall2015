@@ -9,7 +9,9 @@ module.exports = function(app, mongoose) {
         email : String,
         dob : Date,
         address : String,
-        orders : [OrderSchema]
+        orders : [OrderSchema],
+        isAdmin : Boolean,
+        friends : [String]
     }, {collection : "project.user"});
     
     return UserSchema;
