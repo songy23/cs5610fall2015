@@ -9,4 +9,5 @@ module.exports = function(app, mongoose) {
     }, {collection : "order"});
     
     return OrderSchema;
+    // OrderSchema is embeded in UserSchema
 };

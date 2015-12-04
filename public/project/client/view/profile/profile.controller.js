@@ -10,13 +10,19 @@
         profileModel.user = current_user;
         
         profileModel.update = function() {
+            if (profileModel.username == null) {
+                alert("Username cannot be null!");
+                return;
+            }
             
             var updated_user = {
                 username : profileModel.username,
                 password : profileModel.password,
                 firstName : profileModel.firstName,
                 lastName : profileModel.lastName,
-                email : profileModel.email
+                email : profileModel.email,
+                dob : profileModel.dob,
+                address : profileModel.address
             }
             
             if (current_user != null) {

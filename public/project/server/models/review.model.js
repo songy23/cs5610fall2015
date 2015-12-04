@@ -4,40 +4,73 @@ module.exports = function(app, mongoose, db) {
     var ReviewModel = mongoose.model("project.review", ReviewSchema);
     
     var api = {
-        createReviewForUser : createReviewForUser,
+        createReview : createReview,
         findAllReview : findAllReview,
         findReviewById : findReviewById,
         findReviewForUser : findReviewForUser,
-        deleteReview : deleteReview
+        findReviewForBook : findReviewForBook,
+        deleteReview : deleteReview,
+        updateReview : updateReview
     };
     
-    function createReviewForUser(userId, newReview) {
+    function createReview(newReview) {
         var deferred = q.defer();
-        
+        ReviewModel.create(newReview, function(err, result) {
+            deferred.resolve(result);
+        });
         return deferred.promise;
     }
     
     function findAllReview() {
         var deferred = q.defer();
-        
+        ReviewModel.find({}, function(err, results) {
+            deferred.resolve(results);
+        });
         return deferred.promise;
     }
     
     function findReviewById(reviewId) {
         var deferred = q.defer();
-        
+        ReviewModel.find({_id : reviewId}, function(err, results) {
+            deferred.resolve(results);
+        });
         return deferred.promise;
     }
     
     function findReviewForUser(userId) {
         var deferred = q.defer();
-        
+        ReviewModel.find({userId : userId}, function(err, results) {
+            deferred.resolve(results);
+        });
+        return deferred.promise;
+    }
+    
+    function findReviewForBook(bookId) {
+        var deferred = q.defer();
+        ReviewModel.find({bookId : bookId}, function(err, results) {
+            deferred.resolve(results);
+        });
         return deferred.promise;
     }
     
     function deleteReview(reviewId) {
         var deferred = q.defer();
-        
+        ReviewModel.remove({_id : id}, function(err, results) {
+            deferred.resolve(results);
+        });
+        return deferred.promise;
+    }
+    
+    function updateReview(reviewId, updated_review) {
+        var deferred = q.defer();
+        ReviewModel.update(
+            {_id : id}, 
+            {$set : updated_review},
+            function(err, results) {
+                ReviewModel.find({_id : reviewId}, function(err, results) {
+                    deferred.resolve(results);
+                });
+            });
         return deferred.promise;
     }
     

@@ -10,7 +10,10 @@ module.exports = function(app, mongoose, db) {
         updateUser : updateUser,
         deleteUser : deleteUser,
         findUserByUsername : findUserByUsername,
-        findUserByCredentials : findUserByCredentials
+        findUserByCredentials : findUserByCredentials,
+        createOrderForUser : createOrderForUser,
+        findOrderById : findOrderById,
+        deleteOrder : deleteOrder
     };
     
     
@@ -47,7 +50,10 @@ module.exports = function(app, mongoose, db) {
                         lastName : newUser.lastName,
                         username : newUser.username,
                         password : newUser.password,
-                        email : newUser.email
+                        email : newUser.email,
+                        dob : newUser.dob,
+                        address : newUser.address,
+                        orders : newUser.orders
                     }
             },
             function(err, result) {
@@ -83,6 +89,68 @@ module.exports = function(app, mongoose, db) {
             console.log(result);
             deferred.resolve(result);
         });
+        return deferred.promise;
+    }
+    
+    function createOrderForUser(userId, newOrder) {
+        var deferred = q.defer();
+        UserModel.findOne(
+            {_id : userId},
+            function(err, user) {
+                if (err) {
+                    deferred.reject(err);
+                } else if (user != null) {
+                    user.orders.push(newOrder);
+                    user.save(function (err, result) {
+                        deferred.resolve(user);
+                    });
+                } else {
+                    deferred.resolve(null);
+                }
+            });
+        return deferred.promise;
+    }
+
+    function findOrderById(userId, orderId) {
+        var deferred = q.defer();
+        UserModel.findOne(
+            {_id : userId},
+            function(err, user) {
+                if (err) {
+                    deferred.reject(err);
+                } else if (user != null) {
+                    for (var i = 0; i < user.orders.length; i++) {
+                        if (user.orders[i]._id == orderId) {
+                            deferred.resolve(user.orders[i]);
+                        }
+                    }
+                } else {
+                    deferred.resolve(null);
+                }
+            });
+        return deferred.promise;
+    }
+    
+    function deleteOrder(userId, orderId) {
+        var deferred = q.defer();
+        UserModel.findOne(
+            {_id : userId},
+            function(err, user) {
+                if (err) {
+                    deferred.reject(err);
+                } else if (user != null) {
+                    for (var i = 0; i < user.orders.length; i++) {
+                        if (user.orders[i]._id == orderId) {
+                            user.orders.splice(i, 1);
+                            user.save(function(err, result) {
+                                deferred.resolve(user);
+                            });
+                        }
+                    }
+                } else {
+                    deferred.resolve(null);
+                }   
+            });
         return deferred.promise;
     }
     

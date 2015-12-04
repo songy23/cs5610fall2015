@@ -14,7 +14,9 @@
                     password : registerModel.password,
                     firstName : registerModel.firstName,
                     lastName : registerModel.lastName,
-                    email : registerModel.email
+                    email : registerModel.email,
+                    dob : registerModel.dob,
+                    address : registerModel.address
                 };
 
                 UserService.createUser(new_user).then(function(response) {
