@@ -4,7 +4,8 @@ module.exports = function(app, mongoose) {
         bookId : String,
         author : String,
         cover : String,
-        publishDate : Date
+        publishDate : Date,
+        price : Number
     }, {collection : "order"});
     
     return BookSchema;

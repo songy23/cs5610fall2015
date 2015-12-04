@@ -8,5 +8,6 @@ module.exports = function(app, model) {
         var bookId = req.params.id;
         model.findBookById(bookId).then(function(result) {
             res.jsonp(result); 
-        });
+        })
+    });
 };

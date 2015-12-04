@@ -5,7 +5,7 @@ module.exports = function(app, mongoose) {
         bookId : String,
         date : Date,
         content : String,
-        star : Double
+        star : Number
     }, {collection : "review"});
     
     return ReviewSchema;
