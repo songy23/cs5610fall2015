@@ -36,6 +36,34 @@
             </div>
             <!-- /.row -->
             
+            <div class="row">
+                <br>
+            </div>
+            
+            <div class="row">
+                <h3>Search Results</h3>
+                <label ng-if="resultCount == 0">No results.</label>
+                <label ng-if="resultCount != 0">{{resultCount}} results found, display the top 100 results.</label>
+                <table class="table table-striped">
+                    <thead>
+                        <tr>
+                            <th>No</th>
+                            <th>Title</th>
+                            <th>Author</th>
+                            <th>ISBN</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr ng-repeat="book in books">
+                            <td>{{$index}}</td>
+                            <td>{{book.title}}</td>
+                            <td ng-repeat="author in book.author_name">{{author + " "}}</td>
+                            <td>{{book.isbn[0]}}</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+            
         </div>
     </body>
 

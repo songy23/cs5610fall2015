@@ -6,7 +6,7 @@ module.exports = function(app, mongoose) {
         date : Date,
         content : String,
         star : Number
-    }, {collection : "review"});
+    }, {collection : "project.review"});
     
     return ReviewSchema;
 };

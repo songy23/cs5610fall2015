@@ -10,7 +10,7 @@ module.exports = function(app, mongoose) {
         dob : Date,
         address : String,
         orders : [OrderSchema]
-    }, {collection : "user"});
+    }, {collection : "project.user"});
     
     return UserSchema;
 };

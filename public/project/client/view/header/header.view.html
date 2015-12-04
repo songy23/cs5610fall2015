@@ -35,10 +35,10 @@
                         </li>
                         <li class="divider"></li>
                         <li>
-                            <a ng-click="login()"><i class="fa fa-fw fa-sign-in"></i> Log In</a>
+                            <a ng-click="login()"><i class="glyphicon glyphicon-log-in"></i> Log In</a>
                         </li>
                         <li>
-                            <a ng-click="logout()"><i class="fa fa-fw fa-sign-in"></i> Log Out</a>
+                            <a ng-click="logout()"><i class="glyphicon glyphicon-log-out"></i> Log Out</a>
                         </li>
                     </ul>
                 </li>
@@ -46,10 +46,10 @@
             <!-- Sidebar Menu Items - These collapse to the responsive navigation menu on small screens -->
             <div class="collapse navbar-collapse navbar-ex1-collapse">
                 <ul class="nav navbar-nav side-nav">
-                    <li class="active">
+                    <li ng-class="{'active' : $location.url() == '/home'}">
                         <a href="#/home"><i class="fa fa-fw fa-dashboard"></i> Dashboard</a>
                     </li>
-                    <li>
+                    <li ng-class="{'active' : $location.url() == '/search'}">
                         <a href="#/search"><i class="fa fa-fw fa-table"></i> Search</a>
                     </li>
                     <li>

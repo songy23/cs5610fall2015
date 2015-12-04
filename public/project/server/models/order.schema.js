@@ -6,7 +6,7 @@ module.exports = function(app, mongoose) {
         date : Date,
         price : Number,
         quantity : Number
-    }, {collection : "order"});
+    }, {collection : "project.order"});
     
     return OrderSchema;
     // OrderSchema is embeded in UserSchema
