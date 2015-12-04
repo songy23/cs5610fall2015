@@ -20,21 +20,21 @@ module.exports = function(app, model) {
         });
     });
     
-    app.get('/api/project/:isbn/review', function (req, res) {
+    app.get('/api/project/book/isbn/:isbn/review', function (req, res) {
         var isbn = req.params.isbn;
         model.findReviewForBook(isbn).then(function(result) {
             res.jsonp(result); 
         });
     });
     
-    app.get('/api/project/:userId/review', function (req, res) {
+    app.get('/api/project/user/:userId/review', function (req, res) {
         var userId = req.params.userId;
         model.findReviewForUser(userId).then(function(result) {
             res.jsonp(result); 
         });
     });
     
-    app.delete('/api/project/:userId/review/:id', function (req, res) {
+    app.delete('/api/project/user/:userId/review/:id', function (req, res) {
         var id = req.params.id;
         var userId = req.params.userId;
         model.deleteReview(id).then(

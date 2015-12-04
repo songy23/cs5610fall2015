@@ -4,17 +4,21 @@
         .controller("HeaderController", HeaderController);
     
     function HeaderController($scope, $location, $rootScope) {
-        $scope.user = {
-            username : "Visitor"
+        $scope.login = function() {
+            if ($rootScope.user == null) {
+                $scope.$location = "#/login";
+            } else {
+                alert("You have already logged in!");
+            }
         };
-        if ($rootScope.user != null) {
-            $scope.user = $rootScope.user;
-        }
         
         $scope.logout = function() {
-            alert("User " + $rootScope.user.username + " log out");
-            $rootScope.user = null;
-            $scope.user = null;
+            if ($rootScope.user == null) {
+                alert("You haven't logged in!");
+            } else {
+                alert("User " + $rootScope.user.username + " log out");
+                $rootScope.user = null;
+            }
         };
     }
 }) ();

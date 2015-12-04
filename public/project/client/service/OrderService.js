@@ -5,25 +5,35 @@
     function OrderService($http, $q) {
         var service = {
             findOrderById : findOrderById,
-            findOrderByTitle : findOrderByTitle,
-            findAllOrders : findAllOrders,
-            findOrderForUser : findOrderForUser
+            createOrderForUser : createOrderForUser,
+            deleteOrder : deleteOrder
         };
         
-        function findOrderById(bookId) {
-            
+        function findOrderById(orderId, userId) {
+            var deferred = $q.defer();
+            $http.get('/api/project/user/' + userId + '/order/' + orderId)
+                .success(function(response) {
+                deferred.resolve(response);
+            });
+            return deferred.promise;
         }
         
-        function findOrderByTitle(title) {
-            
+        function createOrderForUser(newOrder, userId) {
+            var deferred = $q.defer();
+            $http.post('/api/project/user/' + userId + '/order', newOrder)
+                .success(function(response) {
+                deferred.resolve(response);
+            });
+            return deferred.promise;
         }
         
-        function findAllOrders() {
-            
-        }
-        
-        function findOrderForUser(userId) {
-            
+        function deleteOrder(orderId, userId) {
+            var deferred = $q.defer();
+            $http.delete('/api/project/user/' + userId + '/order/' + orderId)
+                .success(function(response) {
+                deferred.resolve(response);
+            });
+            return deferred.promise;
         }
         
         return service;

@@ -3,9 +3,6 @@
         .module("ReadingFun")
         .config(function($routeProvider){
             $routeProvider
-            .when("/", {
-                templateUrl: "view/home/home.view.html"
-            })
             .when("/home", {
                 templateUrl: "view/home/home.view.html",
                 controller: "HomeController"
@@ -51,7 +48,7 @@
                 controllerAs: "orderModel"
             })
             .otherwise({
-                redirectTo: "/"
+                redirectTo: "/home"
             });
         });
 }) ();
