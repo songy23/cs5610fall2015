@@ -7,6 +7,10 @@
                 templateUrl: "view/home/home.view.html",
                 controller: "HomeController"
             })
+            .when("/search", {
+                templateUrl: "view/search/search.view.html",
+                controller: "SearchController"
+            })
             .when("/profile", {
                 templateUrl: "view/profile/profile.view.html",
                 controller: "ProfileController",

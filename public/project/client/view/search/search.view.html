@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en" ng-app="ReadingFun">
+    <body ng-controller="SearchController">
+        <div class="container-fluid">
+            <!-- Page Heading -->
+            <div class="row">
+                <div class="col-lg-12">
+                    <h1 class="page-header">
+                        Reading Fun <small>Look for your favourite books!</small>
+                    </h1>
+                    <ol class="breadcrumb">
+                        <li class="active">
+                            <i class="fa fa-dashboard"></i> Dashboard
+                        </li>
+                    </ol>
+                </div>
+            </div>
+            <!-- /.row -->
+            
+            <div class="row">
+                <label>Search By: </label><br>
+                <select ng-model="searchType">
+                  <option value="title">Title</option>
+                  <option value="isbn">ISBN</option>
+                  <option value="author">Author</option>
+                </select>
+            </div>
+
+            <div class="row">
+                <br>
+            </div>
+            
+            <div class="row">
+                <input type="text" class="col-sm-8" placeholder="Search By Title, Author, ISBN" ng-model="searchKey">
+                <button ng-click="search(searchType, searchKey)">Search</button>
+            </div>
+            <!-- /.row -->
+            
+        </div>
+    </body>
+
+</html>
