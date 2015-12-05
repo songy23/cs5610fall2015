@@ -32,9 +32,9 @@
             return deferred.promise;
         }
         
-        function findReviewForUser(userId) {
+        function findReviewForUser(username) {
             var deferred = $q.defer();
-            $http.get('/api/project/user/' + userId + '/review')
+            $http.get('/api/project/user/' + username + '/review')
                 .success(function(response) {
                 deferred.resolve(response);
             });

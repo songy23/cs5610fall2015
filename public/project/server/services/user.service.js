@@ -2,7 +2,6 @@ module.exports = function(app, model) {
     
     app.post('/api/project/user', function (req, res) {
         var newUser = req.body;
-        console.log(newUser);
         model.createUser(newUser).then(function(result) {
             res.jsonp(result); 
         });

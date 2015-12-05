@@ -35,7 +35,7 @@
                         </li>
                         <li class="divider"></li>
                         <li>
-                            <a href="#/login" ng-click="login()"><i class="glyphicon glyphicon-log-in"></i> Log In</a>
+                            <a ng-click="login()"><i class="glyphicon glyphicon-log-in"></i> Log In</a>
                         </li>
                         <li>
                             <a ng-click="logout()"><i class="glyphicon glyphicon-log-out"></i> Log Out</a>
@@ -51,12 +51,6 @@
                     </li>
                     <li ng-class="{'active' : $location.url() == '/search'}">
                         <a href="#/search"><i class="fa fa-fw fa-table"></i> Search</a>
-                    </li>
-                    <li>
-                        <a href="#"><i class="fa fa-fw fa-edit"></i> Genres</a>
-                    </li>
-                    <li>
-                        <a href="#"><i class="fa fa-fw fa-bar-chart-o"></i> Top Rated</a>
                     </li>
                 </ul>
             </div>

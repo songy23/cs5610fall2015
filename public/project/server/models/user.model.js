@@ -55,7 +55,8 @@ module.exports = function(app, mongoose, db) {
                         address : newUser.address,
                         orders : newUser.orders,
                         isAdmin : newUser.isAdmin,
-                        friends : newUser.friends
+                        follow : newUser.follow,
+                        lastLogIn : newUser.lastLogIn
                     }
             },
             function(err, result) {

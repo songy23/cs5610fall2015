@@ -11,7 +11,8 @@ module.exports = function(app, mongoose) {
         address : String,
         orders : [OrderSchema],
         isAdmin : Boolean,
-        friends : [String]
+        follow : [String],
+        lastLogIn : Date
     }, {collection : "project.user"});
     
     return UserSchema;

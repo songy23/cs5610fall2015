@@ -3,11 +3,20 @@
         .module("ReadingFun")
         .controller("ProfileController", ProfileController);
     
-    function ProfileController($scope, $location, $rootScope, UserService) {
+    function ProfileController($scope, $location, $rootScope, UserService, ReviewService) {
         var profileModel = this;
         profileModel.$location = $location;
         var current_user = $rootScope.user;
         profileModel.user = current_user;
+        profileModel.reviews = [];
+        profileModel.orders = [];
+        
+        if (current_user != null) {
+            profileModel.orders = current_user.orders;
+            ReviewService.findReviewForUser(current_user.username).then(function(response) {
+                profileModel.reviews = response;
+            });
+        }
         
         profileModel.update = function() {
             if (current_user != null) {
@@ -21,7 +30,8 @@
                     address : profileModel.address,
                     orders : current_user.orders,
                     isAdmin : current_user.isAdmin,
-                    friends : current_user.friends
+                    follow : current_user.follow,
+                    lastLogIn : current_user.lastLogIn
                 };
                 
                 UserService.updateUser(current_user._id, updated_user).then(function(response){

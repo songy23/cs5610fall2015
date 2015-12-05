@@ -24,14 +24,16 @@
                     address : registerModel.address,
                     orders : [],
                     isAdmin : false,
-                    friends : []
+                    follow : [],
+                    lastLogIn : new Date()
                 };
 
+                console.log(new_user);
+                
                 UserService.createUser(new_user).then(function(response) {
                     alert("Register successfully");
-                    console.log(response._id + "  " + response.username);
                     $rootScope.user = response;
-//                    console.log($rootScope.user);
+                    console.log(response);
                     $location.url("/profile");
                 });
             } else {

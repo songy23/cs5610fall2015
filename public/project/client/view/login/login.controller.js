@@ -14,8 +14,10 @@
             UserService.findUserByUsernameAndPassword(loginModel.username, loginModel.password).then(function(response) {
                 if (response != null) {
                     alert("Log in successfully");
-                    console.log(response._id + "  " + response.username); 
                     $rootScope.user = response;
+                    UserService.updateLastLogIn(new Date(), response).then(function(response2) {
+                        console.log(response2);
+                    });
                     $location.url("/profile");
                 } else {
                     alert("Username and Password don't match!");

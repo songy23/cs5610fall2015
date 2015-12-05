@@ -2,45 +2,42 @@
 <html lang="en" ng-app="ReadingFun">
     <body ng-controller="AdminController">
          <div class="container-fluid">
-                <div class="row">
-                    <div class="col-lg-10 review-table">
-                        <h2 class="header2">Administrator</h2>
-                        <label style="margin: 10px;">Normal user cannot access this page</label>
-                        <ul class="nav nav-pills">
-                          <li role="presentation"><a href="">Manage Users</a></li>
-                          <li role="presentation" class="active"><a href="">Edit Reviews</a></li>
-                        </ul>
-                        <div class="table-responsive">
-                            <table class="table table-hover">
-                                <thead>
-                                    <tr>
-                                        <th>ReviewID</th>
-                                        <th>Post Date</th>
-                                        <th>Reviewer</th>
-                                        <th>Action</th>
-                                    </tr>
-                                </thead>
-                                <tbody>
-                                    <tr>
-                                        <td><a>10022231</a></td>
-                                        <td>Aug 23, 2016</td>
-                                        <td><a>User2011</a></td>
-                                        <td><span class="glyphicon glyphicon-edit"></span><span class="glyphicon glyphicon-trash"></span></td>
-                                    </tr>
-                                    <tr>
-                                        <td><a>10011220</a></td>
-                                        <td>Sep 3, 2016</td>
-                                        <td><a>User990</a></td>
-                                        <td><span class="glyphicon glyphicon-edit"></span><span class="glyphicon glyphicon-trash"></span></td>
-                                    </tr>
-                                    
-                                </tbody>
-                            </table>
-                        </div>
+            <div class="row">
+                <div class="col-lg-10 review-table">
+                    <h2 class="header2">Administrator</h2>
+                    <label style="margin: 10px;">Normal user cannot access this page</label>
+                    <ul class="nav nav-pills">
+                      <li role="presentation"><a href="#/admin/user">Manage Users</a></li>
+                      <li role="presentation" class="active"><a href="#/admin/review">Edit Reviews</a></li>
+                    </ul>
+                    <div class="table-responsive">
+                        <table class="table table-hover">
+                            <thead>
+                                <tr>
+                                    <th>Book ISBN</th>
+                                    <th>Post Date</th>
+                                    <th>Reviewer</th>
+                                    <th>Action</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr ng-repeat="review in adminModel.reviews">
+                                    <td>{{review.isbn}}</td>
+                                    <td>{{review.date}}</td>
+                                    <td>{{review.username}}</td>
+                                    <td>
+                                        <button class="btn btn-warning"><span class="glyphicon glyphicon-pencil"></span></button>
+                                        <button class="btn btn-danger" ng-click="adminModel.deleteReview($index)"><span class="glyphicon glyphicon-trash"></span></button>
+                                    </td>
+                                </tr>
+
+                            </tbody>
+                        </table>
                     </div>
-                
                 </div>
+
             </div>
-            <!-- /.container-fluid -->
+        </div>
+        <!-- /.container-fluid -->
     </body>
 </html>

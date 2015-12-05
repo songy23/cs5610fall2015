@@ -37,9 +37,9 @@ module.exports = function(app, mongoose, db) {
         return deferred.promise;
     }
     
-    function findReviewForUser(userId) {
+    function findReviewForUser(username) {
         var deferred = q.defer();
-        ReviewModel.find({userId : userId}, function(err, results) {
+        ReviewModel.find({username : username}, function(err, results) {
             deferred.resolve(results);
         });
         return deferred.promise;

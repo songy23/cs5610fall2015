@@ -62,7 +62,8 @@
             
             <div class="form-group">
                 <div class="col-sm-offset-1 col-sm-10">
-                    <h2 class="header2">My Friends</h2>
+                    <h2 class="header2">I'm following...</h2>
+                    <div><label>Following {{profileModel.user.follow.length}} users</label></div>
                     <div class="table-responsive">
                         <table class="table table-bordered table-hover">
                             <thead>
@@ -74,17 +75,11 @@
                                 </tr>
                             </thead>
                             <tbody>
-                                <tr>
-                                    <td><a>User1111</a></td>
-                                    <td>Online</td>
-                                    <td>7</td>
-                                    <td>Oct 10, 2016</td>
-                                </tr>
-                                <tr>
-                                    <td><a>User1011</a></td>
-                                    <td>Busy</td>
-                                    <td>11</td>
-                                    <td>Oct 08, 2016</td>
+                                <tr ng-repeat="friend in profileModel.user.follow">
+                                    <td>{{friend.username}}</td>
+                                    <td></td>
+                                    <td></td>
+                                    <td>{{friend.lastLogIn}}</td>
                                 </tr>
                             </tbody>
                         </table>
@@ -96,6 +91,7 @@
             <div class="form-group">
                 <div class="col-sm-offset-1 col-sm-10">
                     <h2 class="header2">My Orders</h2>
+                    <div><label>{{profileModel.orders.length}} orders</label></div>
                     <div class="table-responsive">
                         <table class="table table-bordered table-hover table-striped">
                             <thead>
@@ -104,23 +100,16 @@
                                     <th>Book Title</th>
                                     <th>Price</th>
                                     <th>Date</th>
-                                    <th>Seller</th>
+                                    <th>Quantity</th>
                                 </tr>
                             </thead>
                             <tbody>
-                                <tr>
-                                    <td><a href="/client/order/order_detail.view.html">1</a></td>
-                                    <td><a href="/client/book/book_details.view.html">Operating System</a></td>
-                                    <td>65.0</td>
-                                    <td>Aug 15, 2016</td>
-                                    <td><a>Ubooks</a></td>
-                                </tr>
-                                <tr>
-                                    <td><a href="/client/order/order_detail.view.html">2</a></td>
-                                    <td><a>Cracking the Coding Interview</a></td>
-                                    <td>45.0</td>
-                                    <td>Sep 19, 2016</td>
-                                    <td><a>Ubooks</a></td>
+                                <tr ng-repeat="order in profileModel.orders">
+                                    <td>{{$index}}</td>
+                                    <td>{{order.bookTitle}}</td>
+                                    <td>{{order.price}}</td>
+                                    <td>{{order.date | date:'MM-dd-yyyy'}}</td>
+                                    <td>{{order.quantity}}</td>
                                 </tr>
                             </tbody>
                         </table>
@@ -132,35 +121,23 @@
             <div class="form-group">
                 <div class="col-sm-offset-1 col-sm-10">
                     <h2 class="header2">My Reviews</h2>
+                    <div><label>{{profileModel.reviews.length}} reviews</label></div>
                     <div class="table-responsive">
                         <table class="table table-hover">
                         <thead>
                             <tr>
                                 <th>No</th>
-                                <th>Book Title</th>
+                                <th>Book ISBN</th>
                                 <th>Rating</th>
                                 <th>Date</th>
                             </tr>
                         </thead>
                         <tbody>
-                            <tr>
-                                <td><a>1</a></td>
-                                <td><a>The Red and the Black</a></td>
-                                <td><span class="glyphicon glyphicon-star"></span>
-                                <span class="glyphicon glyphicon-star"></span>
-                                <span class="glyphicon glyphicon-star"></span>
-                                <span class="glyphicon glyphicon-star"></span></td>
-                                <td>May 24, 2016</td>
-                            </tr>
-                            <tr>
-                                <td><a>2</a></td>
-                                <td><a>Gift of Magi</a></td>
-                                <td><span class="glyphicon glyphicon-star"></span>
-                                <span class="glyphicon glyphicon-star"></span>
-                                <span class="glyphicon glyphicon-star"></span>
-                                <span class="glyphicon glyphicon-star"></span>
-                                <span class="glyphicon glyphicon-star"></span></td>
-                                <td>July 22, 2016</td>
+                            <tr ng-repeat="review in profileModel.reviews">
+                                <td>{{$index}}</td>
+                                <td>{{review.isbn}}</td>
+                                <td>{{review.rating}}</td>
+                                <td>{{review.date | date:'MM-dd-yyyy'}}</td>
                             </tr>
                         </tbody>
                     </table>

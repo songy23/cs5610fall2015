@@ -27,9 +27,9 @@ module.exports = function(app, model) {
         });
     });
     
-    app.get('/api/project/user/:userId/review', function (req, res) {
-        var userId = req.params.userId;
-        model.findReviewForUser(userId).then(function(result) {
+    app.get('/api/project/user/:username/review', function (req, res) {
+        var username = req.params.username;
+        model.findReviewForUser(username).then(function(result) {
             res.jsonp(result); 
         });
     });

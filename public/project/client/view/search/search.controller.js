@@ -8,7 +8,9 @@
         
         searchModel.$location = $location;
         searchModel.books = [];
+        var books = [];
         searchModel.resultCount = 0;
+        var resultCount = 0;
         
         searchModel.search = function(searchType, searchKey) {
             switch (searchType) {
@@ -41,12 +43,18 @@
         }
         
         function setScope(bookJSON) {
-            searchModel.books = bookJSON.docs;
-            searchModel.resultCount = bookJSON.numFound;
+            books = bookJSON.docs;
+            resultCount = bookJSON.numFound;
         }
         
-        searchModel.saveBook = function($index) {
+        searchModel.display = function() {
+            searchModel.books = books;
+            searchModel.resultCount = resultCount;
+        }
+        
+        searchModel.redirect = function($index) {
             $rootScope.book = searchModel.books[$index];
+            $location.url("/book/" + $rootScope.book.isbn[0]);
         }
     }
 }) ();

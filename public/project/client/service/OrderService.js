@@ -18,9 +18,9 @@
             return deferred.promise;
         }
         
-        function createOrderForUser(newOrder, userId) {
+        function createOrderForUser(newOrder) {
             var deferred = $q.defer();
-            $http.post('/api/project/user/' + userId + '/order', newOrder)
+            $http.post('/api/project/user/' + newOrder.userId + '/order', newOrder)
                 .success(function(response) {
                 deferred.resolve(response);
             });

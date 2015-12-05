@@ -87,29 +87,50 @@
             
             <div class="row">
                 <div class="col-lg-6">
+                    <h3>Buy this book!</h3><br>
+                    <label>Quantity: </label><input type="number" ng-model="bookModel.quantity"/><br><br>
+                    <button type="button" class="btn btn-primary btn-lg" ng-click="bookModel.createOrder()">Purchase</button>
+                </div>
+            </div>
+            
+            <div class="row">
+                <div class="col-lg-6">
                     <h3>Post a reviews on this book!</h3>
                 </div>
             </div>
             
             <div class="row">
                 <div class="col-lg-6">
-                    <label>Content: </label>
-                    <input type="text" ng-model="bookModel.content"/>
+                    <label>Commet: </label><br>
+                    <textarea ng-model="bookModel.content" class="form-control" rows="5"></textarea>
                     <br>
                     <label>Ratings: </label>
-                    <input type="text" ng-model="bookModel.ratings"/>
+                    <select ng-model="bookModel.rating">
+                      <option value="1">Worst</option>
+                      <option value="2">Bad</option>
+                      <option value="3">Mediocre</option>
+                      <option value="4">Good</option>
+                      <option value="5">Excellent</option>
+                    </select>
+                    <br>
                 </div>
             </div>
             
             <div class="row">
                 <div class="col-lg-6">
-                    <button class="btn">submit</button>
+                    <button class="btn" ng-click="bookModel.postReview()">submit</button>
                 </div>
             </div>
             
             <div class="row">
                 <div class="col-lg-6">
                     <h3>Reviews on this book:</h3>
+                </div>
+            </div>
+            
+            <div class="row">
+                <div class="col-lg-6">
+                    <label>{{bookModel.reviews.length}} reviews on this book</label>
                 </div>
             </div>
 
@@ -124,17 +145,11 @@
                                 </tr>
                             </thead>
                             <tbody>
-                                <tr>
-                                    <td>1</td>
-                                    <td><a>User123</a></td>
-                                    <td><span class="glyphicon glyphicon-star"></span><span class="glyphicon glyphicon-star"></span><span class="glyphicon glyphicon-star"></span><span class="glyphicon glyphicon-star"></span><span class="glyphicon glyphicon-star"></span></td>
-                                    <td><a>Click here</a></td>
-                                </tr>
-                                <tr>
-                                    <td>2</td>
-                                    <td><a>User223</a></td>
-                                    <td><span class="glyphicon glyphicon-star"></span><span class="glyphicon glyphicon-star"></span><span class="glyphicon glyphicon-star"></span><span class="glyphicon glyphicon-star"></span></td>
-                                    <td><a>Click here</a></td>
+                                <tr ng-repeat="review in bookModel.reviews">
+                                    <td>{{$index}}</td>
+                                    <td><a>{{review.username}}</a></td>
+                                    <td>{{review.rating}}</td>
+                                    <td><a ng-click="bookModel.redirect($index)">Click here</a></td>
                                 </tr>
                             </tbody>
                 </table>

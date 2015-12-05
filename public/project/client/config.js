@@ -5,7 +5,8 @@
             $routeProvider
             .when("/home", {
                 templateUrl: "view/home/home.view.html",
-                controller: "HomeController"
+                controller: "HomeController",
+                controllerAs: "homeModel"
             })
             .when("/search", {
                 templateUrl: "view/search/search.view.html",
@@ -27,8 +28,13 @@
                 controller: "LoginController",
                 controllerAs: "loginModel"
             })
-            .when("/admin", {
-                templateUrl: "view/admin/admin.view.html",
+            .when("/admin/user", {
+                templateUrl: "view/admin/admin_manage_user.view.html",
+                controller: "AdminController",
+                controllerAs: "adminModel"
+            })
+            .when("/admin/review", {
+                templateUrl: "view/admin/admin_manage_review.view.html",
                 controller: "AdminController",
                 controllerAs: "adminModel"
             })
