@@ -4,9 +4,8 @@
         <div class="container-fluid">
             <div class="row">
                 <div class="col-lg-12">
-                    <div><img src="" style="float: right;"></div>
                     <h2 class="page-header">
-                        Operating System Concepts
+                        {{bookModel.book.title}}
                     </h2>
                     <ol class="breadcrumb">
                         <li>
@@ -19,12 +18,12 @@
                 </div>
             </div>
             <!-- /.row -->
-
+            <div><img src="{{bookModel.coverUrl}}" style="float: right;"></div>
             <div class="row">
                 <div class="col-lg-6">
                     <div class="panel panel-default">
                         <div class="panel-body">
-                            Book Title: Operating System Concepts
+                            Book Title: {{bookModel.book.title}}
                         </div>
                     </div>
                 </div>
@@ -34,7 +33,7 @@
                 <div class="col-lg-6">
                     <div class="panel panel-default">
                         <div class="panel-body">
-                            ISBN:  9787040209280
+                            ISBN:  {{bookModel.book.isbn[0]}}
                         </div>
                     </div>
                 </div>
@@ -44,7 +43,9 @@
                 <div class="col-lg-6">
                     <div class="panel panel-default">
                         <div class="panel-body">
-                            Author: Abraham Silberschatz
+                            Author: <i ng-repeat="author in bookModel.book.author_name">
+                                {{author}}
+                            </i>
                         </div>
                     </div>
                 </div>
@@ -54,7 +55,21 @@
                 <div class="col-lg-6">
                     <div class="panel panel-default">
                         <div class="panel-body">
-                            Language: English
+                            Language: <i ng-repeat="lan in bookModel.book.language">
+                                {{lan}}
+                            </i>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="row">
+                <div class="col-lg-6">
+                    <div class="panel panel-default">
+                        <div class="panel-body">
+                            Subject: <i ng-repeat="sub in bookModel.book.subject">
+                                {{sub}}
+                            </i>
                         </div>
                     </div>
                 </div>
@@ -64,12 +79,34 @@
                 <div class="col-lg-6">
                     <div class="panel panel-default">
                         <div class="panel-body">
-                            Pulication Date: Oct 2007
+                            First Pulish Year: {{bookModel.book.first_publish_year}}
                         </div>
                     </div>
                 </div>
             </div>
-
+            
+            <div class="row">
+                <div class="col-lg-6">
+                    <h3>Post a reviews on this book!</h3>
+                </div>
+            </div>
+            
+            <div class="row">
+                <div class="col-lg-6">
+                    <label>Content: </label>
+                    <input type="text" ng-model="bookModel.content"/>
+                    <br>
+                    <label>Ratings: </label>
+                    <input type="text" ng-model="bookModel.ratings"/>
+                </div>
+            </div>
+            
+            <div class="row">
+                <div class="col-lg-6">
+                    <button class="btn">submit</button>
+                </div>
+            </div>
+            
             <div class="row">
                 <div class="col-lg-6">
                     <h3>Reviews on this book:</h3>
@@ -102,6 +139,7 @@
                             </tbody>
                 </table>
             </div>
+            
         </div>
             <!-- /.container-fluid -->
     </body>

@@ -19,8 +19,8 @@
             
             <div class="row">
                 <label>Search By: </label><br>
-                <select ng-model="searchType">
-                  <option value="title">Title</option>
+                <select ng-model="searchModel.searchType">
+                  <option value="title" selected="selected">Title</option>
                   <option value="isbn">ISBN</option>
                   <option value="author">Author</option>
                 </select>
@@ -31,8 +31,8 @@
             </div>
             
             <div class="row">
-                <input type="text" class="col-sm-8" placeholder="Search By Title, Author, ISBN" ng-model="searchKey">
-                <button ng-click="search(searchType, searchKey)">Search</button>
+                <input type="text" class="col-sm-8" placeholder="Search By Title, Author, ISBN" ng-model="searchModel.searchKey">
+                <button ng-click="searchModel.search(searchModel.searchType, searchModel.searchKey)">Search</button>
             </div>
             <!-- /.row -->
             
@@ -42,8 +42,8 @@
             
             <div class="row">
                 <h3>Search Results</h3>
-                <label ng-if="resultCount == 0">No results.</label>
-                <label ng-if="resultCount != 0">{{resultCount}} results found, display the top 100 results.</label>
+                <label ng-if="searchModel.resultCount == 0">No results.</label>
+                <label ng-if="searchModel.resultCount != 0">{{resultCount}} results found, display the top 100 results.</label>
                 <table class="table table-striped">
                     <thead>
                         <tr>
@@ -54,10 +54,14 @@
                         </tr>
                     </thead>
                     <tbody>
-                        <tr ng-repeat="book in books">
+                        <tr ng-repeat="book in searchModel.books">
                             <td>{{$index}}</td>
-                            <td><a ng-click="jumpToDetails($index)">{{book.title}}</a></td>
-                            <td ng-repeat="author in book.author_name">{{author + " "}}</td>
+                            <td><a href="#/book/{{book.isbn[0]}}" ng-click="searchModel.saveBook($index)">{{book.title}}</a></td>
+                            <td>
+                                <div ng-repeat="author in book.author_name">
+                                    {{author + " "}}
+                                </div>
+                            </td>
                             <td>{{book.isbn[0]}}</td>
                         </tr>
                     </tbody>

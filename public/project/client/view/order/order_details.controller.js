@@ -3,7 +3,9 @@
         .module("ReadingFun")
         .controller("OrderController", OrderController);
     
-    function OrderController($scope, $location, $rootScope) {
-        $scope.$location = $location;
+    function OrderController($location, $rootScope) {
+        var orderModel = this;
+        
+        orderModel.$location = $location;
     }
 }) ();

@@ -3,12 +3,14 @@
         .module("ReadingFun")
         .controller("SearchController", SearchController);
     
-    function SearchController($scope, $location, $rootScope, BookService) {
-        $scope.$location = $location;
-        $scope.books = [];
-        $scope.resultCount = 0;
+    function SearchController($location, $rootScope, BookService) {
+        var searchModel = this;
         
-        $scope.search = function(searchType, searchKey) {
+        searchModel.$location = $location;
+        searchModel.books = [];
+        searchModel.resultCount = 0;
+        
+        searchModel.search = function(searchType, searchKey) {
             switch (searchType) {
               case "title":
                 BookService.findBookByTitle(searchKey).then(function(response) {
@@ -39,15 +41,12 @@
         }
         
         function setScope(bookJSON) {
-            $scope.books = bookJSON.docs;
-            $scope.resultCount = bookJSON.numFound;
-//            console.log($scope.books);
-//            console.log(bookJSON);
+            searchModel.books = bookJSON.docs;
+            searchModel.resultCount = bookJSON.numFound;
         }
         
-        $scope.jumpToDetails = function($index) {
-            $rootScope.book = $scope.books[$index];
-            $location = "/book/" + $rootScope.book.isbn[0];
+        searchModel.saveBook = function($index) {
+            $rootScope.book = searchModel.books[$index];
         }
     }
 }) ();
