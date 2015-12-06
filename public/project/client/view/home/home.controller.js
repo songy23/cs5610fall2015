@@ -9,7 +9,16 @@
         homeModel.userCount = 0;
         homeModel.reviewCount = 0;
         homeModel.books = [];
-        var books = [];
+        BookService.findAllLocalBook().then(function(response) {
+            if (response.length > 25) {
+                var temp = [];
+                for (var j = 0; j < 25; j++) {
+                    temp.push(response[j]);
+                }
+                response = temp;
+            }
+            homeModel.books = response;
+        });
         var coverUrl = "http://covers.openlibrary.org/b/isbn/";
         
         UserService.findAllUsers().then(function(response) {
@@ -36,32 +45,22 @@
                     success: setScope
                 });
             }
-
+            
+            var idx = 25;
+            
             function setScope(bookJSON) {
                 var cover = coverUrl + bookJSON.docs[0].isbn[0] + "-S.jpg";
-                bookJSON.docs[0].cover = cover;
-                books.push(bookJSON.docs[0]);
-    //            $("#displayArea")
-    //                .append("<tr>")
-    //                .append("<td>" + idx + "</td>")
-    //                .append("<td><a href='' ng-click='homeModel.redirect($index)'>" + bookJSON.docs[0].isbn[0] + "</a></td>")
-    //                .append("<td>" + bookJSON.docs[0].title + "</td>")
-    //                .append("<td>" + bookJSON.docs[0].author_name[0] + "</td>")
-    //                .append("<td>" + bookJSON.docs[0].first_publish_year + "</td>")
-    //                .append("<td><img src='" + cover + "'></td>")
-    //                .append("</tr>");
-    //            idx++;
+                homeModel.books.push(bookJSON.docs[0]);
+                var tr_new = $("#template").clone();
+                tr_new.find(".t1").html(idx);
+                tr_new.find(".t2").html('<a href="#/book/' + bookJSON.docs[0].isbn[0] + '">' + bookJSON.docs[0].isbn[0] + '</a>');
+                tr_new.find(".t3").html(bookJSON.docs[0].title);
+                tr_new.find(".t4").html(bookJSON.docs[0].author_name[0]);
+                tr_new.find(".t5").html(bookJSON.docs[0].first_publish_year);
+                tr_new.find(".t6").html('<img src="' + cover + '">');
+                $("#container").append(tr_new);
+                idx++;
             }
-        }
-        
-        
-        homeModel.display = function() {
-            homeModel.books = books;
-        }
-        
-        homeModel.redirect = function($index) {
-            $rootScope.book = homeModel.books[$index];
-            $location.url("/book/" + $rootScope.book.isbn[0]);
         }
     }
 }) ();

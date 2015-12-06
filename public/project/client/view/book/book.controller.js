@@ -3,13 +3,21 @@
         .module("ReadingFun")
         .controller("BookController", BookController);
     
-    function BookController($location, $rootScope, ReviewService, OrderService, UserService) {
+    function BookController($location, $rootScope, $routeParams, ReviewService, OrderService, UserService, BookService) {
         var bookModel = this;
+        var isbn = $routeParams.isbn;
         
         bookModel.$location = $location;
-        bookModel.book = $rootScope.book;
+        bookModel.book = null;
         bookModel.reviews = [];
-        bookModel.coverUrl = "http://covers.openlibrary.org/b/isbn/" + bookModel.book.isbn[0] + "-M.jpg";
+        BookService.findLocalBookByISBN(isbn).then(function(response) {
+            console.log(response);
+            bookModel.book = response;
+            bookModel.coverUrl = "http://covers.openlibrary.org/b/isbn/" + bookModel.book.isbn + "-M.jpg";  
+            ReviewService.findReviewForBook(bookModel.book.isbn).then(function(response){
+                bookModel.reviews = response; 
+            });
+        });
         
         bookModel.createOrder = function() {
             if ($rootScope.user == null) {
@@ -34,17 +42,13 @@
             }
         };
         
-        ReviewService.findReviewForBook(bookModel.book.isbn[0]).then(function(response){
-            bookModel.reviews = response; 
-        });
-        
         bookModel.postReview = function() {
             if ($rootScope.user == null) {
                 alert("Please log in first");
             } else {
                 newReview = {
                     username : $rootScope.user.username,
-                    isbn : bookModel.book.isbn[0],
+                    isbn : bookModel.book.isbn,
                     date : new Date(),
                     content : bookModel.content,
                     rating : bookModel.rating

@@ -42,10 +42,7 @@
             
             <div class="row">
                 <h3>Search Results</h3>
-                <label>There might be delay in retrieving web data, please </label>
-                <button ng-click="searchModel.display()">Click To Display</button><br><br>
-                <label ng-if="searchModel.resultCount == 0">No results.</label>
-                <label ng-if="searchModel.resultCount != 0">{{searchModel.resultCount}} results found, display the top 100 results.</label>
+                <label id="results">No results found.</label>
                 <table class="table table-striped">
                     <thead>
                         <tr>
@@ -55,16 +52,12 @@
                             <th>Author</th>
                         </tr>
                     </thead>
-                    <tbody>
-                        <tr ng-repeat="book in searchModel.books">
-                            <td>{{$index}}</td>
-                            <td><a href="" ng-click="searchModel.redirect($index)">{{book.isbn[0]}}</a></td>
-                            <td>{{book.title}}</td>
-                            <td>
-                                <div ng-repeat="author in book.author_name">
-                                    {{author + " "}}
-                                </div>
-                            </td>
+                    <tbody id='container'>
+                        <tr id='template'>
+                            <td class="t1"></td>
+                            <td class="t2"></td>
+                            <td class="t3"></td>
+                            <td class="t4"></td>
                         </tr>
                     </tbody>
                 </table>

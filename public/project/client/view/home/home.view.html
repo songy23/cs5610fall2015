@@ -30,10 +30,6 @@
             <div class="row">
                 <div class="col-lg-12">
                     <h2>See What People are Reading...</h2>
-                    <label>There might be delay in retrieving web data, please </label>
-                    <button ng-click="homeModel.display()">Click To Display</button>
-                    <br>
-                    <br>
                     <div class="table-responsive">
                         <table class="table table-bordered table-hover">
                             <thead>
@@ -46,18 +42,22 @@
                                     <th>Cover</th>
                                 </tr>
                             </thead>
-                            <tbody id="displayArea">
+                            <tbody id="container">
+                                <tr id="template">
+                                    <td class="t1"></td>
+                                    <td class="t2"></td>
+                                    <td class="t3"></td>
+                                    <td class="t4"></td>
+                                    <td class="t5"></td>
+                                    <td class="t6"></td>
+                                </tr>
                                 <tr ng-repeat="book in homeModel.books">
                                     <td>{{$index}}</td>
-                                    <td><a href="" ng-click="homeModel.redirect($index)">{{book.isbn[0]}}</a></td>
+                                    <td><a href="{{'#/book/' + book.isbn}}">{{book.isbn}}</a></td>
                                     <td>{{book.title}}</td>
-                                    <td>
-                                        <div ng-repeat="author in book.author_name">
-                                            {{author + " "}}
-                                        </div>
-                                    </td>
-                                    <td>{{book.first_publish_year}}</td>
-                                    <td><img src="{{book.cover}}"></td>
+                                    <td>{{book.author}}</td>
+                                    <td>{{book.publishYear}}</td>
+                                    <td><img src="{{'http://covers.openlibrary.org/b/isbn/' + book.isbn + '-S.jpg'}}"></td>
                                 </tr>
                             </tbody>
                         </table>

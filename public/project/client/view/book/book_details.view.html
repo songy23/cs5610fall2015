@@ -33,7 +33,7 @@
                 <div class="col-lg-6">
                     <div class="panel panel-default">
                         <div class="panel-body">
-                            ISBN:  {{bookModel.book.isbn[0]}}
+                            ISBN:  {{bookModel.book.isbn}}
                         </div>
                     </div>
                 </div>
@@ -43,9 +43,7 @@
                 <div class="col-lg-6">
                     <div class="panel panel-default">
                         <div class="panel-body">
-                            Author: <i ng-repeat="author in bookModel.book.author_name">
-                                {{author}}
-                            </i>
+                            Author: {{bookModel.book.author}}
                         </div>
                     </div>
                 </div>
@@ -55,31 +53,7 @@
                 <div class="col-lg-6">
                     <div class="panel panel-default">
                         <div class="panel-body">
-                            Language: <i ng-repeat="lan in bookModel.book.language">
-                                {{lan}}
-                            </i>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            
-            <div class="row">
-                <div class="col-lg-6">
-                    <div class="panel panel-default">
-                        <div class="panel-body">
-                            Subject: <i ng-repeat="sub in bookModel.book.subject">
-                                {{sub}}
-                            </i>
-                        </div>
-                    </div>
-                </div>
-            </div>
-
-            <div class="row">
-                <div class="col-lg-6">
-                    <div class="panel panel-default">
-                        <div class="panel-body">
-                            First Pulish Year: {{bookModel.book.first_publish_year}}
+                            First Pulish Year: {{bookModel.book.publishYear}}
                         </div>
                     </div>
                 </div>
