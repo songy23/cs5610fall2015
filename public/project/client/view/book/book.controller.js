@@ -3,7 +3,7 @@
         .module("ReadingFun")
         .controller("BookController", BookController);
     
-    function BookController($location, $rootScope, ReviewService, OrderService) {
+    function BookController($location, $rootScope, ReviewService, OrderService, UserService) {
         var bookModel = this;
         
         bookModel.$location = $location;
@@ -55,9 +55,20 @@
             }
         };
         
-        bookModel.redirect = function($index) {
+        bookModel.redirect = function($index, destination) {
             $rootScope.review = bookModel.reviews[$index];
-            $location.url("/review/" + bookModel.reviews[$index]._id);
+            if (destination == 'review') {
+                $location.url("/review/" + bookModel.reviews[$index]._id);
+            } else {
+                if ($rootScope.user == null) {
+                    alert("You need to log in to view other's profile");
+                    return;
+                }
+                UserService.findUserByUsername($rootScope.review.username).then(function(response) {
+                    $rootScope.profile_user = response;
+                    $location.url("/guestprofile");
+                });
+            }
         };
     }
 }) ();

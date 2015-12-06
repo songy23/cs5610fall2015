@@ -58,7 +58,7 @@
                     <tbody>
                         <tr ng-repeat="book in searchModel.books">
                             <td>{{$index}}</td>
-                            <td><a ng-click="searchModel.redirect($index)">{{book.isbn[0]}}</a></td>
+                            <td><a href="" ng-click="searchModel.redirect($index)">{{book.isbn[0]}}</a></td>
                             <td>{{book.title}}</td>
                             <td>
                                 <div ng-repeat="author in book.author_name">

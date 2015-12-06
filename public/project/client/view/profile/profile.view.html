@@ -4,11 +4,13 @@
 <body ng-controller="ProfileController">
     <div class="container-fluid">
         <h1 class="registration-label para-header">User Profile</h1>
+        <a href="#/admin/user"><button class="btn btn-primary" ng-if="profileModel.user.isAdmin">Admin Page</button></a>
+        <br>
         <form class="form-horizontal profile-form">
           <div class="form-group">
             <label for="username" class="col-sm-2 control-label registration-label">Username</label>
             <div class="col-sm-10">
-              <label>{{profileModel.user.username}}</label>
+              <label class="col-sm-2 control-label registration-label">{{profileModel.user.username}}</label>
             </div>
           </div>
 
@@ -69,17 +71,17 @@
                             <thead>
                                 <tr>
                                     <th>UserName</th>
-                                    <th>Status</th>
-                                    <th>Reviews</th>
+                                    <th>Email</th>
                                     <th>Last Login</th>
+                                    <th>View Profile</th>
                                 </tr>
                             </thead>
                             <tbody>
-                                <tr ng-repeat="friend in profileModel.user.follow">
+                                <tr ng-repeat="friend in profileModel.follow">
                                     <td>{{friend.username}}</td>
-                                    <td></td>
-                                    <td></td>
+                                    <td>{{friend.email}}</td>
                                     <td>{{friend.lastLogIn}}</td>
+                                    <td><a href="" ng-click="profileModel.redirect($index)">Click here</a></td>
                                 </tr>
                             </tbody>
                         </table>

@@ -10,12 +10,19 @@
         profileModel.user = current_user;
         profileModel.reviews = [];
         profileModel.orders = [];
+        profileModel.follow = [];
         
         if (current_user != null) {
             profileModel.orders = current_user.orders;
             ReviewService.findReviewForUser(current_user.username).then(function(response) {
                 profileModel.reviews = response;
             });
+            for (var i = 0; i < current_user.follow.length; i++) {
+                UserService.findUserByUsername(current_user.follow[i]).then(function(response) {
+                    console.log(response);
+                    profileModel.follow.push(response);
+                });
+            }
         }
         
         profileModel.update = function() {
@@ -41,6 +48,13 @@
                     $location.url("/profile");
                 });
             }
+        }
+        
+        profileModel.redirect = function($index) {
+            UserService.findUserByUsername(profileModel.follow[$index].username).then(function(response) {
+                $rootScope.profile_user = response;
+                $location.url("/guestprofile");
+            });
         }
     }
 }) ();

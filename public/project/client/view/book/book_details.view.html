@@ -141,15 +141,15 @@
                                     <th>No</th>
                                     <th>Reviewer</th>
                                     <th>Rating</th>
-                                    <th>Detail</th>
+                                    <th>Details</th>
                                 </tr>
                             </thead>
                             <tbody>
                                 <tr ng-repeat="review in bookModel.reviews">
                                     <td>{{$index}}</td>
-                                    <td><a>{{review.username}}</a></td>
+                                    <td><a href="" ng-click="bookModel.redirect($index, 'user')">{{review.username}}</a></td>
                                     <td>{{review.rating}}</td>
-                                    <td><a ng-click="bookModel.redirect($index)">Click here</a></td>
+                                    <td><a href="" ng-click="bookModel.redirect($index, 'review')">Click here</a></td>
                                 </tr>
                             </tbody>
                 </table>

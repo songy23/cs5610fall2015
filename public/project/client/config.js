@@ -18,6 +18,11 @@
                 controller: "ProfileController",
                 controllerAs: "profileModel"
             })
+            .when("/guestprofile", {
+                templateUrl: "view/profile_guest/profile_guest.view.html",
+                controller: "GuestProfileController",
+                controllerAs: "guestModel"
+            })
             .when("/register", {
                 templateUrl: "view/register/register.view.html",
                 controller: "RegisterController",
