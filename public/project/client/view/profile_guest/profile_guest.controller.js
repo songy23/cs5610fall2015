@@ -11,6 +11,11 @@
         guestModel.user = profile_user;
         guestModel.follow_users = [];
         
+        if (current_user == null) {
+            alert("You need to log in first to view other's profile");
+            $location.url("/login");
+        }
+        
         if (profile_user != null) {
             ReviewService.findReviewForUser(profile_user.username).then(function(response) {
                 guestModel.reviews = response;
@@ -25,9 +30,16 @@
         }
         
         guestModel.follow = function() {
+            for (var i = 0; i < current_user.follow.length; i++) {
+                if (current_user.follow[i] == profile_user.username) {
+                    alert("You have already followed this user");
+                    return;
+                }
+            }
             current_user.follow.push(profile_user.username);
             UserService.updateUser(current_user._id, current_user).then(function(response) {
                 $rootScope.user = current_user;
+                alert("You are following this user");
             });
         };
         

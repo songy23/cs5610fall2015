@@ -25,6 +25,8 @@
         UserService.findAllUsers().then(function(response) {
             homeModel.userCount = response.length;
             for (var i = 0; i < response.length; i++) {
+                if ($rootScope.user != null && $rootScope.user._id == response[i]._id)
+                    continue;
                 if (!response[i].isAdmin)
                     homeModel.users.push(response[i]);
             }

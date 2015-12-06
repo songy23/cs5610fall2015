@@ -73,5 +73,14 @@
                     break;
             }
         }
+        
+        profileModel.unfollow = function($index) {
+            var unfollowed = current_user.follow.splice($index, 1);
+            profileModel.follow.splice($index, 1);
+            UserService.updateUser(current_user._id, current_user).then(function(response) {
+                $rootScope.user = current_user;
+                alert("Unfollow " + unfollowed);
+            });
+        }
     }
 }) ();
