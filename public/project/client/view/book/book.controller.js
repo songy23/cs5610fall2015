@@ -49,6 +49,7 @@
                 newReview = {
                     username : $rootScope.user.username,
                     isbn : bookModel.book.isbn,
+                    title : bookModel.book.title,
                     date : new Date(),
                     content : bookModel.content,
                     rating : bookModel.rating

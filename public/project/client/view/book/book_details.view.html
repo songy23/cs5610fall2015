@@ -61,6 +61,58 @@
             
             <div class="row">
                 <div class="col-lg-6">
+                    <div class="panel panel-default">
+                        <div class="panel-body">
+                            Publish Places: 
+                            <i ng-repeat="place in bookModel.book.publishPlace">
+                                {{place}}
+                            </i>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="row">
+                <div class="col-lg-6">
+                    <div class="panel panel-default">
+                        <div class="panel-body">
+                            Subjects: 
+                            <i ng-repeat="sub in bookModel.book.subject">
+                                {{sub}}
+                            </i>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="row">
+                <div class="col-lg-6">
+                    <div class="panel panel-default">
+                        <div class="panel-body">
+                            Publishers: 
+                            <i ng-repeat="data in bookModel.book.publisher">
+                                {{data}}
+                            </i>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="row">
+                <div class="col-lg-6">
+                    <div class="panel panel-default">
+                        <div class="panel-body">
+                            Language: 
+                            <i ng-repeat="data in bookModel.book.language">
+                                {{data}}
+                            </i>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="row">
+                <div class="col-lg-6">
                     <h3>Buy this book!</h3><br>
                     <label>Quantity: </label><input type="number" ng-model="bookModel.quantity"/><br><br>
                     <button type="button" class="btn btn-primary btn-lg" ng-click="bookModel.createOrder()">Purchase</button>

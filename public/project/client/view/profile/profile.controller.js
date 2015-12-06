@@ -7,6 +7,12 @@
         var profileModel = this;
         profileModel.$location = $location;
         var current_user = $rootScope.user;
+        
+        if (current_user == null) {
+            alert("Please log in first");
+            $location.url("/login");
+        }
+        
         profileModel.user = current_user;
         profileModel.reviews = [];
         profileModel.orders = [];

@@ -43,6 +43,11 @@
                 controller: "AdminController",
                 controllerAs: "adminModel"
             })
+            .when("/admin/book", {
+                templateUrl: "view/admin/admin_manage_book.view.html",
+                controller: "AdminController",
+                controllerAs: "adminModel"
+            })
             .when("/retrieve", {
                 templateUrl: "view/retrieve_pwd/retrieve_pwd.view.html",
                 controller: "RetrieveController",

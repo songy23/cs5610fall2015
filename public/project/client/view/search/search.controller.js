@@ -52,9 +52,13 @@
                     isbn : temp_isbn,
                     title : books[i].title,
                     author : temp_author,
-                    publishYear : books[i].first_publish_year
+                    publishYear : books[i].first_publish_year,
+                    publishPlace : books[i].publish_place,
+                    subject : books[i].subject,
+                    publisher : books[i].publisher,
+                    language : books[i].language
                 };
-                if (book.isbn != null)
+                if (temp_isbn != null)
                     BookService.saveSearchedBook(book).then(function(response) {});
                 var tr_new = $("#template").clone();
                 tr_new.find(".t1").html(idx);

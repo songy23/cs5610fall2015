@@ -3,28 +3,28 @@
         .module("ReadingFun")
         .controller("ReviewController", ReviewController);
     
-    function ReviewController($location, $rootScope, BookService, ReviewService, UserService) {
+    function ReviewController($location, $rootScope, $routeParams, BookService, ReviewService, UserService) {
         var reviewModel = this;
-        
+        var reviewId = $routeParams.reviewId;
         reviewModel.$location = $location;
         reviewModel.review = $rootScope.review;
         reviewModel.book = $rootScope.book;
         
-        if (reviewModel.book == null) {
-            BookService.findBookByISBN(reviewModel.review.isbn).then(function(response) {
-                $.ajax({
-                    url: response,
-                    dataType: "json",
-                    success: setBook
-                });
+        if (reviewModel.review == null) {
+            ReviewService.findReviewById(reviewId).then(function(response) {
+                reviewModel.review = response;
+                $("#title").append(reviewModel.review.title);
+                if (reviewModel.book == null) {
+                    BookService.findLocalBookByISBN(reviewModel.review.isbn).then(function(response) {
+                        reviewModel.book = response;
+                        $rootScope.book = response;
+                    });
+                }
             });
+        } else {
+            $("#title").append(reviewModel.review.title);
         }
         
-        function setBook(bookJSON) {
-            reviewModel.book = bookJSON.docs[0];
-            $rootScope.book = bookJSON.docs[0];
-            $("#title").append(reviewModel.book.title);
-        }
         
         reviewModel.redirect = function() {
             if ($rootScope.user == null) {

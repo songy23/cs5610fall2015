@@ -7,28 +7,29 @@
                     <h2 class="header2">Administrator</h2>
                     <label style="margin: 10px;">Normal user cannot access this page</label>
                     <ul class="nav nav-pills">
-                      <li role="presentation"><a href="#/admin/user">Manage Users</a></li>
-                      <li role="presentation" class="active"><a href="#/admin/review">Edit Reviews</a></li>
-                        <li role="presentation"><a href="#/admin/book">Manage Local Books</a></li>
+                        <li role="presentation"><a href="#/admin/user">Manage Users</a></li>
+                        <li role="presentation"><a href="#/admin/review">Edit Reviews</a></li>
+                        <li role="presentation" class="active"><a href="#/admin/book">Manage Local Books</a></li>
                     </ul>
                     <div class="table-responsive">
+                        <h2>Manage Local Book Cache</h2>
                         <table class="table table-hover">
                             <thead>
                                 <tr>
                                     <th>Book ISBN</th>
-                                    <th>Post Date</th>
-                                    <th>Reviewer</th>
+                                    <th>Title</th>
+                                    <th>Author</th>
                                     <th>Action</th>
                                 </tr>
                             </thead>
                             <tbody>
-                                <tr ng-repeat="review in adminModel.reviews">
-                                    <td>{{review.isbn}}</td>
-                                    <td>{{review.date}}</td>
-                                    <td>{{review.username}}</td>
+                                <tr ng-repeat="book in adminModel.books">
+                                    <td>{{book.isbn}}</td>
+                                    <td>{{book.title}}</td>
+                                    <td>{{book.author}}</td>
                                     <td>
                                         <button class="btn btn-warning"><span class="glyphicon glyphicon-pencil"></span></button>
-                                        <button class="btn btn-danger" ng-click="adminModel.deleteReview($index)"><span class="glyphicon glyphicon-trash"></span></button>
+                                        <button class="btn btn-danger" ng-click="adminModel.deleteBook($index)"><span class="glyphicon glyphicon-trash"></span></button>
                                     </td>
                                 </tr>
 

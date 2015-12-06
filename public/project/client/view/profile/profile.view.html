@@ -137,7 +137,7 @@
                         <tbody>
                             <tr ng-repeat="review in profileModel.reviews">
                                 <td><a href="" ng-click="profileModel.redirect($index, 'review')">{{$index}}</a></td>
-                                <td>{{review.isbn}}</td>
+                                <td><a href="#/book/{{review.isbn}}">{{review.isbn}}</a></td>
                                 <td>{{review.rating}}</td>
                                 <td>{{review.date | date:'MM-dd-yyyy'}}</td>
                             </tr>

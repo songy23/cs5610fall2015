@@ -12,8 +12,14 @@ module.exports = function(app, mongoose, db) {
     
     function saveSearchedBook(book) {
         var deferred = q.defer();
-        BookModel.create(book, function(err, result) {
-            deferred.resolve(result);
+        BookModel.findOne({isbn : book.isbn}, function(err, result) {
+            if (result != null) {
+                deferred.resolve(null);
+            } else {
+                BookModel.create(book, function(err, result) {
+                    deferred.resolve(result);
+                });
+            }
         });
         return deferred.promise;
     }

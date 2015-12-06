@@ -55,7 +55,7 @@ module.exports = function(app, mongoose, db) {
     
     function deleteReview(reviewId) {
         var deferred = q.defer();
-        ReviewModel.remove({_id : id}, function(err, results) {
+        ReviewModel.remove({_id : reviewId}, function(err, results) {
             deferred.resolve(results);
         });
         return deferred.promise;
