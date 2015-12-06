@@ -18,16 +18,14 @@
         profileModel.orders = [];
         profileModel.follow = [];
         
-        if (current_user != null) {
-            profileModel.orders = current_user.orders;
-            ReviewService.findReviewForUser(current_user.username).then(function(response) {
-                profileModel.reviews = response;
+        profileModel.orders = current_user.orders;
+        ReviewService.findReviewForUser(current_user.username).then(function(response) {
+            profileModel.reviews = response;
+        });
+        for (var i = 0; i < current_user.follow.length; i++) {
+            UserService.findUserByUsername(current_user.follow[i]).then(function(response) {
+                profileModel.follow.push(response);
             });
-            for (var i = 0; i < current_user.follow.length; i++) {
-                UserService.findUserByUsername(current_user.follow[i]).then(function(response) {
-                    profileModel.follow.push(response);
-                });
-            }
         }
         
         profileModel.update = function() {

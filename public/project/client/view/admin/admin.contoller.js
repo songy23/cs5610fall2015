@@ -59,7 +59,8 @@
                     address : "",
                     orders : [],
                     isAdmin : false,
-                    follow : []
+                    follow : [],
+                    lastLogIn : new Date()
                 };
             
             UserService.createUser(new_user).then(function(response) {

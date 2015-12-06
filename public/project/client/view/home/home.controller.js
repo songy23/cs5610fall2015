@@ -9,6 +9,7 @@
         homeModel.userCount = 0;
         homeModel.reviewCount = 0;
         homeModel.books = [];
+        homeModel.users = [];
         BookService.findAllLocalBook().then(function(response) {
             if (response.length > 25) {
                 var temp = [];
@@ -23,6 +24,10 @@
         
         UserService.findAllUsers().then(function(response) {
             homeModel.userCount = response.length;
+            for (var i = 0; i < response.length; i++) {
+                if (!response[i].isAdmin)
+                    homeModel.users.push(response[i]);
+            }
         });
         
         $(init);
@@ -61,6 +66,11 @@
                 $("#container").append(tr_new);
                 idx++;
             }
+        }
+        
+        homeModel.redirect = function($index) {
+            $rootScope.profile_user = homeModel.users[$index];
+            $location.url("/guestprofile");
         }
     }
 }) ();

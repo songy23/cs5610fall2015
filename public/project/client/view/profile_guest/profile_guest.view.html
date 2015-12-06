@@ -83,8 +83,8 @@
                         </thead>
                         <tbody>
                             <tr ng-repeat="review in guestModel.reviews">
-                                <td>{{$index}}</td>
-                                <td>{{review.isbn}}</td>
+                                <td><a href="#/review/{{review._id}}">{{$index}}</a></td>
+                                <td><a href="#/book/{{review.isbn}}">{{review.isbn}}</a></td>
                                 <td>{{review.rating}}</td>
                                 <td>{{review.date | date:'MM-dd-yyyy'}}</td>
                             </tr>
