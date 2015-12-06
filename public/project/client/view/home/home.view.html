@@ -46,7 +46,7 @@
                                     <th>Cover</th>
                                 </tr>
                             </thead>
-                            <tbody>
+                            <tbody id="displayArea">
                                 <tr ng-repeat="book in homeModel.books">
                                     <td>{{$index}}</td>
                                     <td><a href="" ng-click="homeModel.redirect($index)">{{book.isbn[0]}}</a></td>

@@ -16,29 +16,44 @@
             homeModel.userCount = response.length;
         });
         
-        ReviewService.findAllReviews().then(function(reviews) {
-            homeModel.reviewCount = reviews.length;
-            var displayCnt = Math.min(25, reviews.length);
-            for (var i = 0; i < displayCnt; i++) {
-                BookService.findBookByISBN(reviews[i].isbn).then(function(response) {
-                    retrieveaJSON(response);
+        $(init);
+        
+        function init() {
+            ReviewService.findAllReviews().then(function(reviews) {
+                homeModel.reviewCount = reviews.length;
+                var displayCnt = Math.min(25, reviews.length);
+                for (var i = 0; i < displayCnt; i++) {
+                    BookService.findBookByISBN(reviews[i].isbn).then(function(response) {
+                        retrieveaJSON(response);
+                    });
+                }
+            });
+
+            function retrieveaJSON(response) {
+                $.ajax({
+                    url: response,
+                    dataType: "json",
+                    success: setScope
                 });
             }
-        });
-        
-        function retrieveaJSON(response) {
-            $.ajax({
-                url: response,
-                dataType: "json",
-                success: setScope
-            });
+
+            function setScope(bookJSON) {
+                var cover = coverUrl + bookJSON.docs[0].isbn[0] + "-S.jpg";
+                bookJSON.docs[0].cover = cover;
+                books.push(bookJSON.docs[0]);
+    //            $("#displayArea")
+    //                .append("<tr>")
+    //                .append("<td>" + idx + "</td>")
+    //                .append("<td><a href='' ng-click='homeModel.redirect($index)'>" + bookJSON.docs[0].isbn[0] + "</a></td>")
+    //                .append("<td>" + bookJSON.docs[0].title + "</td>")
+    //                .append("<td>" + bookJSON.docs[0].author_name[0] + "</td>")
+    //                .append("<td>" + bookJSON.docs[0].first_publish_year + "</td>")
+    //                .append("<td><img src='" + cover + "'></td>")
+    //                .append("</tr>");
+    //            idx++;
+            }
         }
         
-        function setScope(bookJSON) {
-            var cover = coverUrl + bookJSON.docs[0].isbn[0] + "-S.jpg";
-            bookJSON.docs[0].cover = cover;
-            books.push(bookJSON.docs[0]);
-        }
         
         homeModel.display = function() {
             homeModel.books = books;
