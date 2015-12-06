@@ -29,6 +29,7 @@
                 
                 OrderService.createOrderForUser(newOrder).then(function(response) {
                     alert("You have bought this book!");
+                    $rootScope.user.orders.push(response);
                 });
             }
         };

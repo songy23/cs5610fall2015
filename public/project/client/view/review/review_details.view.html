@@ -11,12 +11,22 @@
                     <div class="col-lg-10">
                         <div class="panel panel-default">
                             <div class="panel-body">
-                                Book Name: <a href="#/book/{{reviewModel.book.isbn}}">{{reviewModel.book.title}}</a>
+                                Book Name: <a href="#/book/{{reviewModel.review.isbn}}" id="title">{{reviewModel.book.title}}</a>
                             </div>
                         </div>
                     </div>
                 </div>
 
+                <div class="row">
+                    <div class="col-lg-10">
+                        <div class="panel panel-default">
+                            <div class="panel-body">
+                                ISBN: {{reviewModel.review.isbn}}
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
                 <div class="row">
                     <div class="col-lg-10">
                         <div class="panel panel-default">

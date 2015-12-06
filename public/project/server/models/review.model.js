@@ -31,7 +31,7 @@ module.exports = function(app, mongoose, db) {
     
     function findReviewById(reviewId) {
         var deferred = q.defer();
-        ReviewModel.find({_id : reviewId}, function(err, results) {
+        ReviewModel.findOne({_id : reviewId}, function(err, results) {
             deferred.resolve(results);
         });
         return deferred.promise;

@@ -10,7 +10,7 @@
                     <div class="col-lg-6">
                         <div class="panel panel-default">
                             <div class="panel-body">
-                                Book Purchased: <a href="">Operating System Concepts</a>
+                                Book Purchased: {{orderModel.order.bookTitle}}
                             </div>
                         </div>
                     </div>
@@ -20,7 +20,7 @@
                         <div class="col-lg-6">
                             <div class="panel panel-default">
                                 <div class="panel-body">
-                                    Purchase Date : Aug 23rd, 2016
+                                    Purchase Date : {{orderModel.order.date | date : 'MM-dd-yyyy'}}
                                 </div>
                             </div>
                         </div>
@@ -30,7 +30,7 @@
                         <div class="col-lg-6">
                             <div class="panel panel-default">
                                 <div class="panel-body">
-                                    Price: $60.00
+                                    Price: {{orderModel.order.price}}
                                 </div>
                             </div>
                         </div>
@@ -40,7 +40,7 @@
                         <div class="col-lg-6">
                             <div class="panel panel-default">
                                 <div class="panel-body">
-                                    Quatity: 1
+                                    Quatity: {{orderModel.order.quantity}}
                                 </div>
                             </div>
                         </div>
@@ -50,7 +50,7 @@
                         <div class="col-lg-6">
                             <div class="panel panel-default">
                                 <div class="panel-body">
-                                    Seller: <a>Ubooks</a>
+                                    Seller: <a>N/A</a>
                                 </div>
                             </div>
                         </div>

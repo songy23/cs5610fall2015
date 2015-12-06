@@ -7,5 +7,6 @@
         var orderModel = this;
         
         orderModel.$location = $location;
+        orderModel.order = $rootScope.order;
     }
 }) ();

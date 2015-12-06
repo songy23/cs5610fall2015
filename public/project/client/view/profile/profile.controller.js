@@ -3,7 +3,7 @@
         .module("ReadingFun")
         .controller("ProfileController", ProfileController);
     
-    function ProfileController($scope, $location, $rootScope, UserService, ReviewService) {
+    function ProfileController($scope, $location, $rootScope, UserService, ReviewService, OrderService) {
         var profileModel = this;
         profileModel.$location = $location;
         var current_user = $rootScope.user;
@@ -19,7 +19,6 @@
             });
             for (var i = 0; i < current_user.follow.length; i++) {
                 UserService.findUserByUsername(current_user.follow[i]).then(function(response) {
-                    console.log(response);
                     profileModel.follow.push(response);
                 });
             }
@@ -50,11 +49,25 @@
             }
         }
         
-        profileModel.redirect = function($index) {
-            UserService.findUserByUsername(profileModel.follow[$index].username).then(function(response) {
-                $rootScope.profile_user = response;
-                $location.url("/guestprofile");
-            });
+        profileModel.redirect = function($index, destination) {
+            switch (destination) {
+                case 'user' : 
+                    UserService.findUserByUsername(profileModel.follow[$index].username).then(function(response) {
+                        $rootScope.profile_user = response;
+                        $location.url("/guestprofile");
+                    });
+                    break;
+                case 'order' :
+                    $rootScope.order = profileModel.orders[$index];
+                    $location.url("/user/" + profileModel.user._id + "/order/" + profileModel.orders[$index]._id);
+                    break;
+                case 'review' :
+                    ReviewService.findReviewById(profileModel.reviews[$index]._id).then(function(response) {
+                        $rootScope.review = response;
+                        $location.url("/review/" + profileModel.reviews[$index]._id);
+                    });
+                    break;
+            }
         }
     }
 }) ();

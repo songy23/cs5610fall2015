@@ -81,7 +81,7 @@
                                     <td>{{friend.username}}</td>
                                     <td>{{friend.email}}</td>
                                     <td>{{friend.lastLogIn}}</td>
-                                    <td><a href="" ng-click="profileModel.redirect($index)">Click here</a></td>
+                                    <td><a href="" ng-click="profileModel.redirect($index, 'user')">Click here</a></td>
                                 </tr>
                             </tbody>
                         </table>
@@ -107,7 +107,7 @@
                             </thead>
                             <tbody>
                                 <tr ng-repeat="order in profileModel.orders">
-                                    <td>{{$index}}</td>
+                                    <td><a href="" ng-click="profileModel.redirect($index, 'order')">{{$index}}</a></td>
                                     <td>{{order.bookTitle}}</td>
                                     <td>{{order.price}}</td>
                                     <td>{{order.date | date:'MM-dd-yyyy'}}</td>
@@ -136,7 +136,7 @@
                         </thead>
                         <tbody>
                             <tr ng-repeat="review in profileModel.reviews">
-                                <td>{{$index}}</td>
+                                <td><a href="" ng-click="profileModel.redirect($index, 'review')">{{$index}}</a></td>
                                 <td>{{review.isbn}}</td>
                                 <td>{{review.rating}}</td>
                                 <td>{{review.date | date:'MM-dd-yyyy'}}</td>
