@@ -14,6 +14,9 @@
             ReviewService.findReviewById(reviewId).then(function(response) {
                 reviewModel.review = response;
                 $("#title").append(reviewModel.review.title);
+                for (var j = 0; j < response.rating; j++) {
+                    $("#rating").append('<span class="glyphicon glyphicon-star"></span>')
+                }
                 if (reviewModel.book == null) {
                     BookService.findLocalBookByISBN(reviewModel.review.isbn).then(function(response) {
                         reviewModel.book = response;
@@ -23,6 +26,9 @@
             });
         } else {
             $("#title").append(reviewModel.review.title);
+            for (var j = 0; j < reviewModel.review.rating; j++) {
+                    $("#rating").append('<span class="glyphicon glyphicon-star"></span>')
+                }
         }
         
         
