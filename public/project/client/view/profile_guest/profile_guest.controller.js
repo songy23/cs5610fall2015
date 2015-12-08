@@ -29,6 +29,10 @@
             }
         }
         
+        if (current_user.username == profile_user.username) {
+            $location.url("/profile");
+        }
+        
         guestModel.follow = function() {
             for (var i = 0; i < current_user.follow.length; i++) {
                 if (current_user.follow[i] == profile_user.username) {
