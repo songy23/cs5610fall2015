@@ -112,25 +112,26 @@
             </div>
             
             <div class="row">
+                <h3 class="alert alert-success" role="alert">Buy this book!</h3>
                 <div class="col-lg-6">
-                    <h3>Buy this book!</h3><br>
-                    <label>Quantity: </label><input type="number" ng-model="bookModel.quantity"/><br><br>
-                    <button type="button" class="btn btn-primary btn-lg" ng-click="bookModel.createOrder()">Purchase</button>
+                    <label class="label label-success" style="font-size : 14px;">Quantity: &nbsp;</label>
+                    <input type="number" ng-model="bookModel.quantity"/><br><br>
+                    <button type="button" class="btn btn-primary" ng-click="bookModel.createOrder()">Purchase</button>
+                </div>
+            </div>
+            
+            <div class="row">
+                <div class="col-lg-12">
+                    <h3 class="alert alert-success" role="alert">Post a reviews on this book!</h3>
                 </div>
             </div>
             
             <div class="row">
                 <div class="col-lg-6">
-                    <h3>Post a reviews on this book!</h3>
-                </div>
-            </div>
-            
-            <div class="row">
-                <div class="col-lg-6">
-                    <label>Commet: </label><br>
+                    <label class="label label-info" style="font-size : 14px;">Comment: </label><br>
                     <textarea ng-model="bookModel.content" class="form-control" rows="5"></textarea>
                     <br>
-                    <label>Ratings: </label>
+                    <label class="label label-default" style="font-size : 14px;">Ratings: </label>
                     <select ng-model="bookModel.rating">
                       <option value="1">Worst</option>
                       <option value="2">Bad</option>
@@ -138,10 +139,9 @@
                       <option value="4">Good</option>
                       <option value="5">Excellent</option>
                     </select>
-                    <br>
                 </div>
             </div>
-            
+            <br>
             <div class="row">
                 <div class="col-lg-6">
                     <button class="btn btn-primary" ng-click="bookModel.postReview()">submit</button>
@@ -149,8 +149,8 @@
             </div>
             
             <div class="row">
-                <div class="col-lg-6">
-                    <h3>Reviews:</h3>
+                <div class="col-lg-12">
+                    <h3 class="alert alert-info" role="alert">Reviews:</h3>
                 </div>
             </div>
             
