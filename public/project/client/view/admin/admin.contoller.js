@@ -16,7 +16,10 @@
         adminModel.books = [];
         
         UserService.findAllUsers().then(function(response) {
-            adminModel.users = response;
+            for (var i = 0; i < response.length; i++) {
+                if (response[i]._id != $rootScope.user._id)
+                  adminModel.users.push(response[i]);
+            }
         });
         
         ReviewService.findAllReviews().then(function(response) {
@@ -69,5 +72,15 @@
                 console.log(response._id + "  " + response.username);
             });
         }
+        
+        adminModel.redirect = function ($index, type) {
+            if (type == 'user') {
+                $rootScope.profile_user = adminModel.users[$index];
+                $location.url("/guestprofile");
+            } else {
+                $rootScope.review = adminModel.reviews[$index];
+                $location.url("/review/" + adminModel.reviews[$index]._id);
+            }
+        };
     }
 }) ();

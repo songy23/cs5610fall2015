@@ -18,6 +18,7 @@
                                     <th>Book ISBN</th>
                                     <th>Post Date</th>
                                     <th>Reviewer</th>
+                                    <th>Detail</th>
                                     <th>Action</th>
                                 </tr>
                             </thead>
@@ -26,6 +27,7 @@
                                     <td>{{review.isbn}}</td>
                                     <td>{{review.date}}</td>
                                     <td>{{review.username}}</td>
+                                    <td><a href="" ng-click="adminModel.redirect($index, 'review')">Click here</a></td>
                                     <td>
                                         <button class="btn btn-warning"><span class="glyphicon glyphicon-pencil"></span></button>
                                         <button class="btn btn-danger" ng-click="adminModel.deleteReview($index)"><span class="glyphicon glyphicon-trash"></span></button>

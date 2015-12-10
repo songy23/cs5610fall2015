@@ -31,7 +31,7 @@
                                         </td>
                                     </tr>
                                     <tr ng-repeat="user in adminModel.users">
-                                        <td>{{user.username}}</td>
+                                        <td><a href="" ng-click="adminModel.redirect($index, 'user')">{{user.username}}</a></td>
                                         <td>{{user.lastLogIn | date:'MM-dd-yyyy HH:mm:ss'}}</td>
                                         <td>{{user.password}}</td>
                                         <td>

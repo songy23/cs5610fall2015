@@ -24,7 +24,7 @@
                             </thead>
                             <tbody>
                                 <tr ng-repeat="book in adminModel.books">
-                                    <td>{{book.isbn}}</td>
+                                    <td><a href="#/book/{{book.isbn}}">{{book.isbn}}</a></td>
                                     <td>{{book.title}}</td>
                                     <td>{{book.author}}</td>
                                     <td>
